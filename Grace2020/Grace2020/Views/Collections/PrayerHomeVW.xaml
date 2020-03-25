@@ -389,7 +389,7 @@
                 </cntrl:GradientGrid.GestureRecognizers>
             </cntrl:GradientGrid>
 
-            <ActivityIndicator Color="Black"
+            <ActivityIndicator Color="{DynamicResource NavigationForeground}"
                                IsRunning="{Binding IsBusy}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"

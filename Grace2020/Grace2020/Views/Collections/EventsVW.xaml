@@ -46,7 +46,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <ActivityIndicator Color="Black"
+            <ActivityIndicator Color="{DynamicResource NavigationForeground}"
                                IsRunning="{Binding IsBusy}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
