@@ -11,7 +11,6 @@ namespace Grace2020.Controls
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            GetPageTheme();
         }
 
         protected override void LayoutChildren(double x, double y, double width, double height)
