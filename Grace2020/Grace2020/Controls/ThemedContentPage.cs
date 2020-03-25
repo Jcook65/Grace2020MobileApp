@@ -8,7 +8,19 @@ namespace Grace2020.Controls
 {
     public class ThemedContentPage : ContentPage
     {
-        public void ChangePageTheme()
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            GetPageTheme();
+        }
+
+        protected override void LayoutChildren(double x, double y, double width, double height)
+        {
+            base.LayoutChildren(x, y, width, height);
+            GetPageTheme();
+        }
+
+        public void GetPageTheme()
         {
             if(BindingContext is VMBase vm)
             {

@@ -141,6 +141,7 @@
                                        Padding="1">
                                     <Label Text="{Binding ModuleName}"
                                            Style="{DynamicResource LabelStyle}"
+                                           TextColor="Black"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"
                                            Margin="10"/>

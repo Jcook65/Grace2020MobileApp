@@ -42,7 +42,7 @@ namespace Grace2020.iOS.Renderers
                 SetAppTheme();
                 if(Element is ThemedContentPage page)
                 {
-                    page.ChangePageTheme();
+                    page.GetPageTheme();
                 }
             }
         }
