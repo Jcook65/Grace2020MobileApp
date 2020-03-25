@@ -71,6 +71,7 @@
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <OptimizePNGs>true</OptimizePNGs>
+    <MtouchExtraArgs>--optimize=experimental-xforms-product-type</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AdHoc|iPhoneSimulator'">
     <OutputPath>bin\iPhoneSimulator\AdHoc\</OutputPath>
