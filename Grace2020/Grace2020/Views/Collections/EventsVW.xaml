@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Grace2020.Views.Collections.EventsVW"
+             x:Name="this"
+             xmlns:iviews="clr-namespace:Grace2020.Views.Instances"
+             xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
+             BackgroundColor="{DynamicResource NavigationPrimary}">
+    <ContentPage.Content>
+        <Grid Margin="0,30,0,10"
+              HorizontalOptions="Center">
+            <ListView x:Name="eventList"
+                      ItemsSource="{Binding Events}"
+                      BackgroundColor="{DynamicResource NavigationPrimary}"
+                      CachingStrategy="RecycleElement"
+                      ItemTapped="eventList_ItemTapped"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True"
+                      HorizontalOptions="Center">
+                <ListView.Header>
+                    <ContentView>
+                        <Grid HorizontalOptions="Center">
+                            <Grid.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <On Platform="iOS" Value="30"/>
+                                    <On Platform="Android" Value="20"/>
+                                </OnPlatform>
+                            </Grid.Margin>
+                            <Label Text="{trns:Translate Text=Events}"
+                                   Style="{DynamicResource LabelHeader1Style}"
+                                   HorizontalOptions="Center"/>
+                        </Grid>
+                    </ContentView>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <iviews:EventItemVW/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ActivityIndicator Color="Black"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               x:Name="activityIndicator"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

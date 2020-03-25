@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Grace2020.Views.Instances.NewsItemVW"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:cntrl="clr-namespace:Grace2020.Controls"
+             BackgroundColor="{DynamicResource NavigationPrimary}">
+    <ContentView.Content>
+        <Grid RowSpacing="0"
+              Margin="10,20,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="{Binding TitleText}"
+                   Style="{DynamicResource LabelHeader1Style}"
+                   LineBreakMode="WordWrap"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Margin="10,10,0,0"
+                   Grid.Row="0"
+                   Grid.Column="0"/>
+
+            <Label Text="{Binding FormattedDate}"
+                   Style="{DynamicResource BoldLabelStyle}"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   Margin="10,0,0,10"/>
+            
+            <Label Text="{Binding TruncatedNews}"
+                   Style="{DynamicResource LabelStyle}"
+                   LineBreakMode="WordWrap"
+                   Margin="10,0,0,0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Grid.Row="2"
+                   Grid.Column="0"/>
+
+            <ff:CachedImage x:Name="newsImage"
+                            CacheDuration="30"
+                            CacheType="Memory"
+                            LoadingPlaceholder="loadingImage.jpg"
+                            FadeAnimationEnabled="True"
+                            FadeAnimationDuration="750"
+                            FadeAnimationForCachedImages="False"
+                            TransformPlaceholders="True"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            HeightRequest="300"
+                            Aspect="AspectFill"
+                            Grid.Column="1"
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Margin="0,0,0,20">
+                <ff:CachedImage.Transformations>
+                    <fftransform:CornersTransformation CornersTransformType="LeftRounded"
+                                                       TopLeftCornerSize="30"
+                                                       BottomLeftCornerSize="30"
+                                                       CropHeightRatio="1.75"
+                                                       />
+                </ff:CachedImage.Transformations>
+            </ff:CachedImage>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

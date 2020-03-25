@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       mc:Ignorable="d"
+       xmlns:iViews="clr-namespace:Grace2020.Views.Instances"
+       xmlns:cViews="clr-namespace:Grace2020.Views.Collections"
+       xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
+       Title="Grace2020"
+       x:Class="Grace2020.AppShell"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Style="{DynamicResource BaseStyle}">
+
+    <!-- 
+        Styles and Resources 
+    -->
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{DynamicResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource NavigationForeground}" />
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource NavigationPrimary}" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource NavigationPrimaryDarker}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource NavigationForeground}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource GracePurple}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource GracePink}"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent ContentTemplate="{DataTemplate cViews:PrayerHomeVW}"
+                      Route="Home"
+                      Icon="homeButton_lightGray.png"/>
+
+        <ShellContent ContentTemplate="{DataTemplate cViews:NewsVW}"
+                      Route="News"
+                      Icon="newsButton_lightGray.png"/>
+
+        <ShellContent ContentTemplate="{DataTemplate cViews:EventsVW}"
+                      Route="Events"
+                      Icon="eventsButton_lightGray.png"/>
+
+        <ShellContent ContentTemplate="{DataTemplate iViews:AboutVW}"
+                      Route="About"
+                      Icon="ABOUT_ICON.png"/>
+    </TabBar>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Label Text="{Binding Title}"
+                   Style="{DynamicResource LabelHeader1Style}"
+                   Padding="50, 20"/>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <!--</FlyoutItem>-->
+
+    <!-- Optional Templates 
+    // These may be provided inline as below or as separate classes.
+
+    // This header appears at the top of the Flyout.
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid>ContentHere</Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    // ItemTemplate is for ShellItems as displayed in a Flyout
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Title, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    // MenuItemTemplate is for MenuItems as displayed in a Flyout
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <ContentView>
+                Bindable Properties: Text, Icon
+            </ContentView>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+
+    -->
+
+</Shell>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Grace2020.Views.Instances.RoundedNewsImageVW"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
+    <ContentView.Content>
+        <ff:CachedImage CacheDuration="1"
+                            LoadingPlaceholder="loadingImage.jpg"
+                            FadeAnimationEnabled="True"
+                            FadeAnimationDuration="200"
+                            TransformPlaceholders="True"
+                            x:Name="newsImage"
+                            Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+            <ff:CachedImage.Transformations>
+                <fftransform:CornersTransformation CornersTransformType="AllRounded"
+                                                   CropHeightRatio="0"
+                                                   CropWidthRatio="0"
+                                                   TopLeftCornerSize="20"
+                                                   TopRightCornerSize="20"
+                                                   BottomLeftCornerSize="20"
+                                                   BottomRightCornerSize="20"/>
+            </ff:CachedImage.Transformations>
+        </ff:CachedImage>
+    </ContentView.Content>
+</ContentView>

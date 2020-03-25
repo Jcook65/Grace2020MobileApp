@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                    x:Class="Grace2020.Styles.BaseTheme">
+    <!-- Fonts -->
+    <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+        <On Platform="iOS" Value="Rounded Mplus 1c"/>
+        <On Platform="Android" Value="MPLUSRounded1c-Regular.ttf#Rounded Mplus 1c"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+        <On Platform="iOS" Value="Rounded Mplus 1c Bold"/>
+        <On Platform="Android" Value="MPLUSRounded-Bold.ttf#Rounded Mplus 1c Bold"/>
+    </OnPlatform>
+
+    <!-- COLORS -->
+    <Color x:Key="NavigationPrimary">#FFFFFFFF</Color>
+    <Color x:Key="NavigationPrimaryDarker">#FFFFFFFF</Color>
+    <Color x:Key="NavigationForeground">#000000</Color>
+    <Color x:Key="GracePink">#ED1D66</Color>
+    <Color x:Key="GracePurple">#91479B</Color>
+    <Color x:Key="GraceDarkPurple">#663748</Color>
+    <Color x:Key="BorderColor">#000000</Color>
+    <Color x:Key="TitleTextColor">#000000</Color>
+    <Color x:Key="ParagraphTextColor">#000000</Color>
+    <Color x:Key="LightTextColor">#FFFFFF</Color>
+
+    <!--STACKLAYOUTS-->
+    <Style TargetType="StackLayout"
+           x:Key="CenteredStackLayoutStyle">
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <!-- SearchBar -->
+    <Style TargetType="SearchBar">
+        <Setter Property="FontFamily" Value="{DynamicResource NormalFont}"/>
+    </Style>
+
+    <!--========================================LABELS=======================================-->
+
+    <!--LabelStyle-->
+    <Style TargetType="Label"
+                   x:Key="LabelStyle">
+        <Setter Property="TextColor" Value="{DynamicResource TitleTextColor}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource NormalFont}"/>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="18"/>
+                    <On Platform="iOS" Value="20"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--BoldLabelStyle-->
+    <Style TargetType="Label"
+                   x:Key="BoldLabelStyle"
+                   BasedOn="{StaticResource LabelStyle}">
+        <Setter Property="TextColor" Value="{DynamicResource TitleTextColor}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+    </Style>
+
+    <!--LabelHeader1Style-->
+    <Style TargetType="Label"
+                   BasedOn="{StaticResource BoldLabelStyle}"
+                   x:Key="LabelHeader1Style">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="26"/>
+                    <On Platform="iOS" Value="24"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--LabelHeader2Style-->
+    <Style TargetType="Label"
+                   BasedOn="{StaticResource BoldLabelStyle}"
+                   x:Key="LabelHeader2Style">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="22"/>
+                    <On Platform="iOS" Value="20"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--LabelHeader3Style-->
+    <Style TargetType="Label"
+                   BasedOn="{StaticResource LabelStyle}"
+                   x:Key="LabelHeader3Style">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="23"/>
+                    <On Platform="iOS" Value="21"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

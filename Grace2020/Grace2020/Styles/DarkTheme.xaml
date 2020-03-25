@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                    x:Class="Grace2020.Styles.DarkTheme"
+                    Source="BaseTheme.xaml">
+    <!-- COLORS -->
+    <Color x:Key="NavigationPrimary">#202020</Color>
+    <Color x:Key="NavigationPrimaryDarker">#090909</Color>
+    <Color x:Key="NavigationForeground">#ffffff</Color>
+    <Color x:Key="GracePink">#ED1D66</Color>
+    <Color x:Key="GracePurple">#91479B</Color>
+    <Color x:Key="GraceDarkPurple">#663748</Color>
+    <Color x:Key="BorderColor">#ffffff</Color>
+    <Color x:Key="TitleTextColor">#FFFFFF</Color>
+    <Color x:Key="ParagraphTextColor">#FFFFFF</Color>
+    <Color x:Key="LightTextColor">#FFFFFF</Color>
+
+
+</ResourceDictionary>

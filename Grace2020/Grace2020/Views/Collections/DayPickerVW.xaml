@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Grace2020.Views.Collections.DayPickerVW"
+             x:Name="this"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <CarouselView ItemsSource="{Binding Days}"
+                      CurrentItem="{Binding SelectedDay}"
+                      VerticalOptions="CenterAndExpand"
+                      HorizontalOptions="CenterAndExpand"
+                      x:Name="DayCarousel">
+            <CarouselView.PeekAreaInsets>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="Android" Value="0,310"/>
+                    <On Platform="iOS" Value="0,400,0,400"/>
+                </OnPlatform>
+            </CarouselView.PeekAreaInsets>
+            <CarouselView.ItemsLayout>
+                <LinearItemsLayout SnapPointsAlignment="Start"
+                                   Orientation="Vertical"/>
+            </CarouselView.ItemsLayout>
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Spacing="0"
+                                 Orientation="Vertical"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Margin="30,10"
+                                 Opacity=".25">
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout"
+                                         Binding="{Binding IsSelected}"
+                                         Value="True">
+                                <Setter Property="Opacity"
+                                        Value="1"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                        <Label Text="{Binding FormattedDate}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{DynamicResource LabelStyle}"/>
+                        <Label Text="{Binding TitleText}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{DynamicResource LabelHeader1Style}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.SelectDay, Source={x:Reference this}}"
+                                                  CommandParameter="{Binding .}"/>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+    </ContentPage.Content>
+</ContentPage>
