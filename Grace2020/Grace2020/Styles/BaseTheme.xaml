@@ -10,7 +10,7 @@
 
     <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
         <On Platform="iOS" Value="Rounded Mplus 1c Bold"/>
-        <On Platform="Android" Value="MPLUSRounded-Bold.ttf#Rounded Mplus 1c Bold"/>
+        <On Platform="Android" Value="MPLUSRounded1c-Bold.ttf#Rounded Mplus 1c Bold"/>
     </OnPlatform>
 
     <!-- COLORS -->

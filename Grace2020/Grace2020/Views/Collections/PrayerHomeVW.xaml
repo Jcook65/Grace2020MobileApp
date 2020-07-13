@@ -50,13 +50,18 @@
                                     HorizontalOptions="Fill"
                                     VerticalOptions="Fill"
                                     WidthRequest="900"
-                                    PropertyChanging="dayCarouselPropertyChanging"
+                                    ItemAppearing="OnItemAppearing"
                                     x:Name="dayCarousel"
-                                    IsCyclical="False">
+                                    IsCyclical="True">
+                    <x:Arguments>
+                        <proc:CarouselProcessor OpacityFactor="-1" ScaleFactor=".9"/>
+                    </x:Arguments>
+
                     <cards:CarouselView.ItemTemplate>
                         <DataTemplate>
                             <ContentView HorizontalOptions="Fill"
-                                         VerticalOptions="Fill">
+                                         VerticalOptions="Fill"
+                                         x:Name="prayerCard">
                                 <ContentView.Margin>
                                     <OnPlatform x:TypeArguments="Thickness">
                                         <On Platform="iOS" Value="0,20,0,0"/>
@@ -105,7 +110,13 @@
                 <Grid Grid.Row="0"
                       Margin="0,20,0,0"
                       Padding="20">
-                    <Image Source="downArrow_darkGray.png"
+                    <Grid.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="30"/>
+                            <On Platform="iOS" Value="30"/>
+                        </OnPlatform>
+                    </Grid.HeightRequest>
+                    <Image Source="upArrow_darkGray.png"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        x:Name="moduleListArrow">
@@ -114,7 +125,7 @@
                                          Binding="{Binding AppTheme}"
                                          Value="1">
                                 <Setter Property="Source"
-                                        Value="downArrow_white.png"/>
+                                        Value="upArrow_white.png"/>
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
@@ -156,6 +167,19 @@
                   HorizontalOptions="End"
                   VerticalOptions="Start"
                   Padding="25">
+                <Grid.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="30"/>
+                        <On Platform="iOS" Value="30"/>
+                    </OnPlatform>
+                </Grid.HeightRequest>
+                <Grid.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="30"/>
+                        <On Platform="iOS" Value="30"/>
+                    </OnPlatform>
+                </Grid.WidthRequest>
+                
                 <Grid.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="iOS" Value="0,15,0,0"/>
@@ -180,7 +204,8 @@
 
             <Grid x:Name="searchBox"
                   HorizontalOptions="Center"
-                  VerticalOptions="Start">
+                  VerticalOptions="Start"
+                  ColumnSpacing="0">
                 <Grid.Margin>
                     <OnPlatform x:TypeArguments="Thickness">
                         <On Platform="iOS" Value="0,35,0,0"/>
@@ -192,7 +217,14 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0"
-                      HorizontalOptions="FillAndExpand">
+                      HorizontalOptions="CenterAndExpand">
+                    <Grid.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="30"/>
+                            <On Platform="iOS" Value="30"/>
+                        </OnPlatform>
+                    </Grid.HeightRequest>
+                    
                     <Image Source="rightArrow_darkGray.png"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
@@ -262,13 +294,20 @@
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Grid.Row="0"
-                           x:Name="regionArrow"/>
+                           x:Name="regionArrow">
+                        <Image.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="30"/>
+                                <On Platform="iOS" Value="30"/>
+                            </OnPlatform>
+                        </Image.HeightRequest>
+                    </Image>
                     <ScrollView x:Name="regionScrollView"
                                 Grid.Row="1">
                         <ScrollView.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="iOS" Value="750"/>
-                                <On Platform="Android" Value="600"/>
+                                <On Platform="Android" Value="650"/>
                             </OnPlatform>
                         </ScrollView.HeightRequest>
                         <StackLayout>
@@ -336,6 +375,12 @@
                            VerticalOptions="Center"
                            Grid.Row="0"
                            x:Name="prayerArrow">
+                        <Image.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="Android" Value="30"/>
+                                <On Platform="iOS" Value="30"/>
+                            </OnPlatform>
+                        </Image.HeightRequest>
                         <Image.Triggers>
                             <DataTrigger TargetType="Image"
                                          Binding="{Binding AppTheme}"
@@ -363,7 +408,14 @@
                                         <Image Source="outline_bullet1.png"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Start"
-                                               Margin="0,5,0,0"/>
+                                               Margin="0,5,0,0">
+                                            <Image.HeightRequest>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="Android" Value="20"/>
+                                                    <On Platform="iOS" Value="20"/>
+                                                </OnPlatform>
+                                            </Image.HeightRequest>
+                                        </Image>
                                         <Label Text="{Binding .}"
                                                Style="{DynamicResource LabelStyle}"
                                                HorizontalOptions="Start"

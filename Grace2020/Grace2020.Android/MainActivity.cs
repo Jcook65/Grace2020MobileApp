@@ -12,6 +12,8 @@ namespace Grace2020.Droid
     [Activity(Label = "Grace2020",
         ScreenOrientation = ScreenOrientation.Portrait, 
         Theme = "@style/SplashTheme", 
+        Icon = "@drawable/Grace2020",
+        RoundIcon = "@drawable/Grace2020_Circle",
         MainLauncher = true, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity

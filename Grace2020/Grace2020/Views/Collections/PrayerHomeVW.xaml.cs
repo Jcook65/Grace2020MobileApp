@@ -4,7 +4,9 @@ using Grace2020.ViewModels.Collections;
 using PanCardView.Controls;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,7 +18,8 @@ namespace Grace2020.Views.Collections
         Unexpanded = 1,
         PrayerExpanded = 2,
         RegionExpanded = 3,
-        ModulesExpanded = 4
+        ModulesExpanded = 4,
+        SearchExpanded = 5,
     }
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -48,13 +51,16 @@ namespace Grace2020.Views.Collections
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            header.TranslationY = 0;
-            region.TranslationY = header.Height;
-            prayer.TranslationY = mainContainer.Height/1.8;
-            modulesList.TranslationY = -modulesList.Height;
-            modulesList.IsEnabled = false;
-            searchBox.TranslationX = mainContainer.Width;
-            searchBox.TranslationY = 0;
+            if (_prayerHomeState == PrayerHomeState.Unexpanded)
+            {
+                header.TranslationY = 0;
+                region.TranslationY = header.Height;
+                prayer.TranslationY = mainContainer.Height/1.8;
+                modulesList.TranslationY = -modulesList.Height;
+                modulesList.IsEnabled = false;
+                searchBox.TranslationX = mainContainer.Width;
+                searchBox.TranslationY = 0;
+            }
         }
 
         protected override async void OnAppearing()
@@ -78,6 +84,8 @@ namespace Grace2020.Views.Collections
             }
             else
             {
+
+                Debug.WriteLine("Entering Expand Region Animation");
                 await Task.WhenAll(
                     searchIcon.FadeTo(0, length, Easing.CubicInOut),
                     searchBox.TranslateTo(mainContainer.Width, 0, length, Easing.CubicInOut),
@@ -98,6 +106,7 @@ namespace Grace2020.Views.Collections
                 modulesList.IsEnabled = false;
                 searchIcon.IsEnabled = false;
                 dayCarousel.IsEnabled = false;
+                Debug.WriteLine("Exiting Expand Region Animation");
             }
         }
 
@@ -110,6 +119,8 @@ namespace Grace2020.Views.Collections
             }
             else
             {
+                Debug.WriteLine("Entering Expand Prayer Animation");
+
                 await Task.WhenAll(
                     searchIcon.FadeTo(0, length, Easing.CubicInOut),
                     searchBox.TranslateTo(mainContainer.Width, 0, length, Easing.CubicInOut),
@@ -131,11 +142,14 @@ namespace Grace2020.Views.Collections
                 modulesList.IsEnabled = false;
                 searchIcon.IsEnabled = false;
                 dayCarousel.IsEnabled = false;
+
+                Debug.WriteLine("Exiting Expand Prayer Animation");
             }
         }
 
         private async Task UnexpandAnimation(uint length)
         {
+            Debug.WriteLine("Entering Unexpand Animation");
             searchIcon.IsEnabled = true;
             await Task.WhenAll(
                 searchIcon.FadeTo(1, length, Easing.CubicInOut),
@@ -158,6 +172,8 @@ namespace Grace2020.Views.Collections
             modulesList.IsEnabled = false;
             _isSearchVisible = false;
             dayCarousel.IsEnabled = true;
+
+            Debug.WriteLine("Exiting Unexpand Animation");
         }
 
         private async void HeaderTapped(object sender, EventArgs e)
@@ -170,6 +186,8 @@ namespace Grace2020.Views.Collections
             modulesList.IsEnabled = true;
             searchIcon.IsEnabled = false;
             var length = Convert.ToUInt32(_transitionTime * _delayFactor);
+
+            Debug.WriteLine("Entering Expand Modules Animation");
 
             await Task.WhenAll(
                 searchIcon.FadeTo(0, length, Easing.CubicInOut),
@@ -190,6 +208,8 @@ namespace Grace2020.Views.Collections
             prayersList.IsEnabled = false;
             regionScrollView.IsEnabled = false;
             dayCarousel.IsEnabled = false;
+
+            Debug.WriteLine("Exiting Expand Modules Animation");
         }
 
         private async void ModuleArrowTapped(object sender, EventArgs e)
@@ -213,6 +233,7 @@ namespace Grace2020.Views.Collections
                 searchIcon.FadeTo(0, length, Easing.CubicInOut),
                 searchBox.TranslateTo(0, 0, length, Easing.CubicInOut));
             dayCarousel.IsEnabled = true;
+            _prayerHomeState = PrayerHomeState.SearchExpanded;
         }
 
         private async void SearchDismissIconTapped(object sender, EventArgs e)
@@ -229,17 +250,22 @@ namespace Grace2020.Views.Collections
             Device.BeginInvokeOnMainThread(() => regionImage.Source = e?.ImageURL);
         }
 
-        private void dayCarouselPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        private async void OnItemAppearing(PanCardView.CardsView view, PanCardView.EventArgs.ItemAppearingEventArgs args)
         {
-
-            if (e.PropertyName == nameof(dayCarousel.IsUserInteractionRunning) && _isSearchVisible)
+            if(_prayerHomeState == PrayerHomeState.SearchExpanded)
             {
-                if (BindingContext is PrayerHomeVM vm && vm.Prayers != null)
-                {
-                    Device.BeginInvokeOnMainThread(async () => await UnexpandAnimation(Convert.ToUInt32(_transitionTime * _delayFactor)));
-                }
+                await UnexpandAnimation(Convert.ToUInt32(_transitionTime * _delayFactor));
             }
-                
         }
+
+        //private void DayCarouselPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e)
+        //{
+        //    var opacity = 20 / Math.Abs(dayCarousel.CurrentDiff);
+
+        //    if (dayCarousel?.CurrentView != null && dayCarousel.CurrentView.Opacity != opacity)
+        //    {
+        //        dayCarousel.CurrentView.Opacity = opacity;
+        //    }
+        //}
     }
 }

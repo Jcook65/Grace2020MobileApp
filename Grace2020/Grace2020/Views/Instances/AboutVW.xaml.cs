@@ -1,4 +1,5 @@
 ﻿using Grace2020.Resources;
+using Grace2020.Styles;
 using Grace2020.ViewModels.Instances;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,23 @@ namespace Grace2020.Views.Instances
         private async void OnEmailFailure(object sender, EventArgs e)
         {
             await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK);
+        }
+
+        private void DarkModeToggled(object sender, ToggledEventArgs e)
+        {
+            if(BindingContext is AboutVM vm)
+            {
+                if (vm.IsDarkModeEnabled)
+                {
+                    App.Current.Resources = new DarkTheme();
+                    App.AppTheme = Themes.Dark;
+                }
+                else
+                {
+                    App.Current.Resources = new LightTheme();
+                    App.AppTheme = Themes.Light;
+                }
+            }
         }
     }
 }

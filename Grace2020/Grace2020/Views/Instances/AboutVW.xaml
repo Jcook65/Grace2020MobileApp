@@ -144,7 +144,9 @@
                     </StackLayout.IsVisible>
                     <Label Text="{trns:Translate Text=DarkMode}"
                            Style="{DynamicResource LabelStyle}"/>
-                    <Switch IsToggled="{Binding IsDarkModeEnabled}"/>
+                    <Switch IsToggled="{Binding IsDarkModeEnabled}"
+                            OnColor="{StaticResource GracePink}"
+                            Toggled="DarkModeToggled"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
