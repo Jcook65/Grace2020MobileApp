@@ -51,6 +51,7 @@ namespace Grace2020.Services
                         finally
                         {
                             _configSemaphore.Release();
+                            response.Dispose();
                         }
                     }
                 }
