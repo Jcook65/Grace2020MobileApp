@@ -1,40 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <cntrl:ThemedContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Name="this"
-             x:Class="Grace2020.Views.Collections.PrayerHomeVW"
-             xmlns:cntrl="clr-namespace:Grace2020.Controls"
-             xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
-             xmlns:app="clr-namespace:Grace2020"
-             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-             xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             BackgroundColor="{DynamicResource NavigationPrimary}">
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                         xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                         xmlns:cntrl="clr-namespace:Grace2020.Controls"
+                         xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
+                         xmlns:cnvrt="clr-namespace:Grace2020.Utils"
+                         xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+                         xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+                         mc:Ignorable="d"
+                         x:Name="this"
+                         x:Class="Grace2020.Views.Collections.PrayerHomeVW"
+                         BackgroundColor="{DynamicResource NavigationPrimary}">
     <cntrl:ThemedContentPage.Resources>
-        <Style TargetType="cntrl:CustomFrame" x:Key="BodyStyle">
+        <Style TargetType="cntrl:CornerRadiusFrame" x:Key="BodyStyle">
             <Setter Property="IsClippedToBounds" Value="True"/>
             <Setter Property="CornerRadius" Value="40,40,0,0"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="HasShadow" Value="False"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
         </Style>
 
-        <Style TargetType="cntrl:CustomFrame" x:Key="TabStyle" BasedOn="{StaticResource BodyStyle}">
+        <Style TargetType="cntrl:CornerRadiusFrame" x:Key="TabStyle" BasedOn="{StaticResource BodyStyle}">
             <Setter Property="CornerRadius" Value="20,20,0,0"/>
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="WidthRequest" Value="150"/>
             
         </Style>
+
+        <cnvrt:StringIsNotNullOrEmptyConverter x:Key="notNull"/>
     </cntrl:ThemedContentPage.Resources>
     <cntrl:ThemedContentPage.Content>
 
         <Grid RowSpacing="0"
               ColumnSpacing="0"
               x:Name="mainContainer">
-            
+
             <Grid x:Name="header"
                   HorizontalOptions="Center"
                   VerticalOptions="Start"
@@ -45,8 +46,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <cards:CarouselView ItemsSource="{Binding Prayers}"
-                                    SelectedItem="{Binding SelectedModulesLookup}"
+                <cards:CarouselView ItemsSource="{Binding Topics}"
+                                    SelectedIndex="{Binding SelectedModulesLookup.SequenceIndex, Mode=OneWay}"
                                     HorizontalOptions="Fill"
                                     VerticalOptions="Fill"
                                     WidthRequest="900"
@@ -71,98 +72,72 @@
                                              HorizontalOptions="Fill"
                                              VerticalOptions="Center"
                                              Spacing="0">
-                                    <Label Text="{Binding FullTitle}"
+                                    <Label Text="{Binding OptionalDelimiter}"
                                            Style="{DynamicResource LabelHeader1Style}"
+                                           IsVisible="{Binding OptionalDelimiter, Converter={StaticResource notNull}}"
+                                           TextTransform="Uppercase"
                                            HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           Margin="0,0,0,10"/>
-                                    
-                                    <Label Text="{Binding Prayer.RegionFormat}"
-                                           Style="{DynamicResource LabelHeader1Style}"
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,-5"
+                                           Padding="0"/>
+
+                                    <Label Text="{Binding Topic.Title}"
+                                           Style="{DynamicResource PageTitleStyle}"
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,-5"
+                                           Padding="0"/>
+                                    <Label Text="{Binding Topic.SubTitle}"
+                                           Style="{DynamicResource LabelHeader2Style}"
                                            FontFamily="{StaticResource NormalFont}"
                                            HorizontalOptions="Center"
-                                           VerticalOptions="Center"/>
-                                     <Label Text="{Binding Prayer.PrefectureFormat}"
-                                            Style="{DynamicResource LabelHeader1Style}"
-                                            FontFamily="{StaticResource NormalFont}"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"/>
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,0"
+                                           Padding="0"/>
                                 </StackLayout>
-                                <ContentView.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="HeaderTapped"/>
-                                </ContentView.GestureRecognizers>
                             </ContentView>
                         </DataTemplate>
                     </cards:CarouselView.ItemTemplate>
                 </cards:CarouselView>
             </Grid>
 
-            <Grid x:Name="modulesList"
-                  HorizontalOptions="Center"
+            <Grid x:Name="backIcon"
+                  HorizontalOptions="Start"
                   VerticalOptions="Start"
-                  RowSpacing="0"
-                  BackgroundColor="{DynamicResource NavigationPrimary}"
-                  HeightRequest="180">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0"
-                      Margin="0,20,0,0"
-                      Padding="20">
-                    <Grid.HeightRequest>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android" Value="30"/>
-                            <On Platform="iOS" Value="30"/>
-                        </OnPlatform>
-                    </Grid.HeightRequest>
-                    <Image Source="upArrow_darkGray.png"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       x:Name="moduleListArrow">
-                        <Image.Triggers>
-                            <DataTrigger TargetType="Image"
-                                         Binding="{Binding AppTheme}"
-                                         Value="1">
-                                <Setter Property="Source"
-                                        Value="upArrow_white.png"/>
-                            </DataTrigger>
-                        </Image.Triggers>
-                    </Image>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="ModuleArrowTapped"/>
-                    </Grid.GestureRecognizers>
-                </Grid>
-                <CarouselView x:Name="modulesCarousel"
-                              ItemsSource="{Binding Modules}"
-                              Grid.Row="1">
-                    <CarouselView.ItemsLayout>
-                        <LinearItemsLayout SnapPointsAlignment="Center"
-                                           SnapPointsType="MandatorySingle"
-                                           Orientation="Horizontal"/>
-                    </CarouselView.ItemsLayout>
-                    
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <ContentView>
-                                <Frame BackgroundColor="#EFEFEF"
-                                       CornerRadius="20"
-                                       HasShadow="False"
-                                       Margin="40,15,40,15"
-                                       Padding="1">
-                                    <Label Text="{Binding ModuleName}"
-                                           Style="{DynamicResource LabelStyle}"
-                                           TextColor="Black"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Center"
-                                           Margin="10"/>
-                                </Frame>
-                            </ContentView>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-            </Grid>
+                  Padding="25">
+                <Grid.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="30"/>
+                        <On Platform="iOS" Value="30"/>
+                    </OnPlatform>
+                </Grid.HeightRequest>
+                <Grid.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="30"/>
+                        <On Platform="iOS" Value="30"/>
+                    </OnPlatform>
+                </Grid.WidthRequest>
+                <Grid.Margin>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,15,0,0"/>
+                    </OnPlatform>
+                </Grid.Margin>
 
+                <Image Source="rightArrow_white.png"
+                       RotationY="180"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center">
+                    <Image.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="20"/>
+                            <On Platform="Android" Value="30"/>
+                        </OnPlatform>
+                    </Image.HeightRequest>
+                </Image>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="BackIconTapped"/>
+                </Grid.GestureRecognizers>
+            </Grid>
+            
             <Grid x:Name="searchIcon"
                   HorizontalOptions="End"
                   VerticalOptions="Start"
@@ -185,7 +160,7 @@
                         <On Platform="iOS" Value="0,15,0,0"/>
                     </OnPlatform>
                 </Grid.Margin>
-                <Image Source="searchIcon.png"
+                <Image Source="searchIcon_white.png"
                        HorizontalOptions="Center"
                        VerticalOptions="Center">
                     <Image.Triggers>
@@ -196,6 +171,12 @@
                                     Value="searchIcon_white.png"/>
                         </DataTrigger>
                     </Image.Triggers>
+                    <Image.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="20"/>
+                            <On Platform="Android" Value="30"/>
+                        </OnPlatform>
+                    </Image.HeightRequest>
                 </Image>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="SearchIconTapped"/>
@@ -224,8 +205,8 @@
                             <On Platform="iOS" Value="30"/>
                         </OnPlatform>
                     </Grid.HeightRequest>
-                    
-                    <Image Source="rightArrow_darkGray.png"
+
+                    <Image Source="rightArrow_white.png"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Margin="10,0,10,0">
@@ -237,6 +218,12 @@
                                         Value="rightArrow_white.png"/>
                             </DataTrigger>
                         </Image.Triggers>
+                        <Image.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double">
+                                <On Platform="iOS" Value="15"/>
+                                <On Platform="Android" Value="25"/>
+                            </OnPlatform>
+                        </Image.HeightRequest>
                     </Image>
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="SearchDismissIconTapped"/>
@@ -247,58 +234,72 @@
                            SearchCommand="{Binding Search}"
                            Placeholder="{trns:Translate Text=SearchForPrefecture}"
                            BackgroundColor="{DynamicResource NavigationPrimary}"
+                           PlaceholderColor="{DynamicResource NavigationForeground}"
+                           TextColor="{DynamicResource LightTextColor}"
+                           CancelButtonColor="{DynamicResource NavigationForeground}"
                            Grid.Column="1"/>
             </Grid>
 
-            <cntrl:GradientGrid StartColor="{DynamicResource GracePink}"
-                                MiddleColor="{DynamicResource GracePurple}"
-                                EndColor="{DynamicResource GraceDarkPurple}"
-                                VerticalOptions="StartAndExpand"
-                                RowSpacing="0"
-                                x:Name="region">
+            <Grid BackgroundColor="Transparent"
+                  VerticalOptions="StartAndExpand"
+                  RowSpacing="0"
+                  x:Name="region">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <cntrl:CustomFrame Style="{DynamicResource TabStyle}"
+                <cntrl:CornerRadiusFrame Style="{DynamicResource TabStyle}"
+                                   BackgroundColor="{DynamicResource NavigationSecondary}"
                                    HorizontalOptions="Start"
                                    Margin="40,0,0,0"
+                                   x:Name="regionTab"
                                    Grid.Row="0">
-                    <cntrl:CustomFrame.TranslationY>
+                    <cntrl:CornerRadiusFrame.TranslationY>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="iOS" Value="1"/>
                         </OnPlatform>
-                    </cntrl:CustomFrame.TranslationY>
-                    <Label Text="{trns:Translate Text=RegionCAP}"
+                    </cntrl:CornerRadiusFrame.TranslationY>
+                    <Label Text="{trns:Translate Text=InfoCAP}"
+                           CharacterSpacing="2"
                            Style="{DynamicResource LabelHeader1Style}"
-                           TextColor="{DynamicResource LightTextColor}"
+                           TextColor="{DynamicResource DarkTextColor}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-                </cntrl:CustomFrame>
+                </cntrl:CornerRadiusFrame>
 
-                <cntrl:CustomFrame Style="{DynamicResource BodyStyle}"
+                <cntrl:CornerRadiusFrame Style="{DynamicResource BodyStyle}"
                                    Grid.Row="1"
-                                   x:Name="regionBody">
+                                   x:Name="regionBody"
+                                   BackgroundColor="{DynamicResource NavigationSecondary}">
 
-                </cntrl:CustomFrame>
+                </cntrl:CornerRadiusFrame>
                 <Grid Grid.Row="1"
                       RowSpacing="0"
                       HorizontalOptions="Center"
                       VerticalOptions="Start"
-                      BackgroundColor="Transparent">
+                      BackgroundColor="Transparent"
+                      x:Name="regionText">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image Source="downArrow_white.png"
+                    <Image Source="downArrow_darkGray.png"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
                            Grid.Row="0"
                            x:Name="regionArrow">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image"
+                                         Binding="{Binding AppTheme}"
+                                         Value="1">
+                                <Setter Property="Source"
+                                        Value="downArrow_white.png"/>
+                            </DataTrigger>
+                        </Image.Triggers>
                         <Image.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="Android" Value="30"/>
-                                <On Platform="iOS" Value="30"/>
+                                <On Platform="iOS" Value="20"/>
                             </OnPlatform>
                         </Image.HeightRequest>
                     </Image>
@@ -306,62 +307,73 @@
                                 Grid.Row="1">
                         <ScrollView.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
-                                <On Platform="iOS" Value="750"/>
+                                <On Platform="iOS" Value="800"/>
                                 <On Platform="Android" Value="650"/>
                             </OnPlatform>
                         </ScrollView.HeightRequest>
                         <StackLayout>
-                            <Label Text="{Binding SelectedModulesLookup.Prayer.MoreInfoText}"
+                            <Label Text="{Binding SelectedModulesLookup.Topic.Info}"
                                        HorizontalOptions="Center"
                                        Style="{DynamicResource LabelStyle}"
-                                       TextColor="{DynamicResource LightTextColor}"
-                                       Margin="40"/>
-                            <ff:CachedImage x:Name="regionImage"
-                                            CacheDuration="30"
-                                            CacheType="Memory"
-                                            FadeAnimationEnabled="True"
-                                            FadeAnimationDuration="400"
-                                            FadeAnimationForCachedImages="False"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"
-                                            Margin="40,0,40,90"/>
+                                       TextColor="{DynamicResource DarkTextColor}"
+                                       Margin="40,40,40,50"/>
+                            <Frame CornerRadius="20"
+                                   Margin="40,0,40,90"
+                                   x:Name="imageFrame">
+                                <Frame.Background>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="{DynamicResource GraceLightColor}" Offset="0.1"/>
+                                        <GradientStop Color="{DynamicResource GraceDarkColor}" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Frame.Background>
+                                <ff:CachedImage x:Name="regionImage"
+                                                CacheType="Memory"
+                                                FadeAnimationEnabled="True"
+                                                FadeAnimationDuration="400"
+                                                FadeAnimationForCachedImages="False"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                Margin="20"/>
+                            </Frame>
                         </StackLayout>
                     </ScrollView>
                 </Grid>
-                <cntrl:GradientGrid.GestureRecognizers>
+                <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="RegionTapped"/>
-                </cntrl:GradientGrid.GestureRecognizers>
-            </cntrl:GradientGrid>
+                    <PanGestureRecognizer PanUpdated="OnInfoPanUpdated" TouchPoints="1"/>
+                </Grid.GestureRecognizers>
+            </Grid>
 
-            <cntrl:GradientGrid RowSpacing="0"
-                                StartColor="{DynamicResource NavigationPrimary}"
-                                MiddleColor="{DynamicResource NavigationPrimary}"
-                                EndColor="{DynamicResource NavigationPrimary}"
-                                x:Name="prayer"
-                                VerticalOptions="FillAndExpand">
+            <Grid RowSpacing="0"
+                  x:Name="prayer"
+                  BackgroundColor="Transparent"
+                  VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <cntrl:CustomFrame Style="{DynamicResource TabStyle}"
+                <cntrl:CornerRadiusFrame Style="{DynamicResource TabStyle}"
+                                   BackgroundColor="{DynamicResource NavigationPrimary}"
                                    HorizontalOptions="End"
                                    Margin="0,0,50,0"
                                    Grid.Row="0">
-                    <cntrl:CustomFrame.TranslationY>
+                    <cntrl:CornerRadiusFrame.TranslationY>
                         <OnPlatform x:TypeArguments="x:Double">
                             <On Platform="iOS" Value="1"/>
                         </OnPlatform>
-                    </cntrl:CustomFrame.TranslationY>
+                    </cntrl:CornerRadiusFrame.TranslationY>
                     <Label Text="{trns:Translate Text=PrayerCAP}"
+                           CharacterSpacing="2"
                            Style="{DynamicResource LabelHeader1Style}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-                </cntrl:CustomFrame>
-                <cntrl:CustomFrame Style="{DynamicResource BodyStyle}"
+                </cntrl:CornerRadiusFrame>
+                <cntrl:CornerRadiusFrame Style="{DynamicResource BodyStyle}"
+                                   BackgroundColor="{DynamicResource NavigationPrimary}"
                                    Grid.Row="1"
                                    x:Name="prayerBody">
                     
-                </cntrl:CustomFrame>
+                </cntrl:CornerRadiusFrame>
                 <Grid Grid.Row="1"
                       RowSpacing="0"
                       HorizontalOptions="Center"
@@ -378,7 +390,7 @@
                         <Image.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="Android" Value="30"/>
-                                <On Platform="iOS" Value="30"/>
+                                <On Platform="iOS" Value="20"/>
                             </OnPlatform>
                         </Image.HeightRequest>
                         <Image.Triggers>
@@ -390,22 +402,19 @@
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
-                    <ListView ItemsSource="{Binding SelectedModulesLookup.Prayer.Prayers}"
-                              x:Name="prayersList"
-                              HasUnevenRows="True"
-                              HorizontalOptions="Center"
-                              VerticalOptions="Start"
-                              Grid.Row="1"
-                              SeparatorVisibility="None"
-                              BackgroundColor="Transparent"
-                              Margin="0,20,0,0">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
+                    <ScrollView x:Name="prayersList"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                Grid.Row="1"
+                                BackgroundColor="Transparent"
+                                Margin="0,20,0,0">
+                        <StackLayout BindableLayout.ItemsSource="{Binding SelectedModulesLookup.Topic.Prayers}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
                                     <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="Center"
+                                                 HorizontalOptions="StartAndExpand"
                                                  Margin="20">
-                                        <Image Source="outline_bullet1.png"
+                                        <Image Source="bluebullet.png"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Start"
                                                Margin="0,5,0,0">
@@ -416,16 +425,16 @@
                                                 </OnPlatform>
                                             </Image.HeightRequest>
                                         </Image>
-                                        <Label Text="{Binding .}"
+                                        <Label Text="{Binding PrayerText}"
                                                Style="{DynamicResource LabelStyle}"
                                                HorizontalOptions="Start"
                                                VerticalOptions="Center"
                                                LineBreakMode="WordWrap"/>
                                     </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
                     <!--<ScrollView x:Name="prayerScrollView"
                                 Grid.Row="1"
                                 HorizontalOptions="Center"
@@ -436,10 +445,11 @@
                                    Margin="40"/>
                     </ScrollView>-->
                 </Grid>
-                <cntrl:GradientGrid.GestureRecognizers>
+                <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="PrayerTapped"/>
-                </cntrl:GradientGrid.GestureRecognizers>
-            </cntrl:GradientGrid>
+                    <PanGestureRecognizer PanUpdated="OnPrayerPanUpdated" TouchPoints="1"/>
+                </Grid.GestureRecognizers>
+            </Grid>
 
             <ActivityIndicator Color="{DynamicResource NavigationForeground}"
                                IsRunning="{Binding IsBusy}"

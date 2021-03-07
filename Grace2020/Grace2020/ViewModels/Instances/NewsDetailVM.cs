@@ -1,4 +1,6 @@
-﻿using Grace2020.Models.Tables;
+﻿using GalaSoft.MvvmLight.Command;
+using Grace2020.Models.Tables;
+using Grace2020.Navigation;
 using Grace2020.ViewModels.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace Grace2020.ViewModels.Instances
             get { return _news; }
             set { Set(() => News, ref _news, value); }
         }
+
+        public RelayCommand<SelectableItemVM> EnlargeImage { get; private set; }
 
         public NewsDetailVM(News news)
         {

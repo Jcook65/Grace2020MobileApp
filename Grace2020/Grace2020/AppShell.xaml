@@ -26,12 +26,17 @@
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{DynamicResource NavigationPrimaryDarker}" />
                 <Setter Property="Shell.TabBarForegroundColor" Value="{DynamicResource NavigationForeground}"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource GracePurple}"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="{DynamicResource GracePink}"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="{DynamicResource GraceDarkColor}"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
+    
+    <ShellItem>
+        <ShellContent ContentTemplate="{DataTemplate cViews:ModulesVW}"
+                      Route="Modules"/>
+    </ShellItem>
 
     <TabBar FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent ContentTemplate="{DataTemplate cViews:PrayerHomeVW}"

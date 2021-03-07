@@ -9,9 +9,6 @@ namespace Grace2020.Controls
     {
         public static new readonly BindableProperty CornerRadiusProperty = 
             BindableProperty.Create(nameof(CustomFrame), typeof(CornerRadius), typeof(CustomFrame));
-        public Xamarin.Forms.Color StartColor { get; set; }
-        public Xamarin.Forms.Color MiddleColor { get; set; }
-        public Xamarin.Forms.Color EndColor { get; set; }
 
         public new CornerRadius CornerRadius
         {

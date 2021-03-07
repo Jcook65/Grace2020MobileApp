@@ -21,6 +21,15 @@ namespace Grace2020.Services
         {
         }
 
+        public async Task<HttpContent> GetRequest(string url)
+        {
+            using(var client = new HttpClient(new RetryHandler(new HttpClientHandler())))
+            {
+                var response = await client.GetAsync(url);
+                return response.Content;
+            }
+        }
+
         public async Task RefreshDataAsync<TModel>(string url, string jsonPackage ) where TModel : IModel, new()
         {
             var uri = new Uri(string.Format(url, string.Empty));

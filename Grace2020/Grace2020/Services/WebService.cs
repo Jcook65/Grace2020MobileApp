@@ -59,19 +59,24 @@ namespace Grace2020.Services
             await GetDataAsync<Prayer>(new string[] { "Prayers", GetTwoCharacterCultureCode()});
         }
 
+        public async Task GetTopicsAsync()
+        {
+            await GetDataAsync<Topic>(new string[] { "Topics", GetTwoCharacterCultureCode() });
+        }
+
         public async Task GetNewsAsync()
         {
             await GetDataAsync<News>(new string[] { "News", GetTwoCharacterCultureCode() });
         }
 
-        public async Task GetImageLookupAsync()
+        public async Task GetNewsAssetLookupAsync()
         {
-            await GetDataAsync<ImageLookup>(new string[] { "ImagesLookup", ""});
+            await GetDataAsync<NewsAssetLookup>(new string[] { "ImagesLookup", ""});
         }
 
         public async Task GetModulesLookupAsync()
         {
-            await GetDataAsync<ModulesLookup>(new string[] { "ModulesLookup", GetTwoCharacterCultureCode() });
+            await GetDataAsync<ModulesLookup>(new string[] { "ModulesLookup", ""});
         }
 
         public async Task GetModulesAsync()
@@ -86,7 +91,7 @@ namespace Grace2020.Services
 
         public async Task GetEventsImagesLookupAsync()
         {
-            await GetDataAsync<EventImageLookup>(new string[] { "EventsImagesLookup", "" });
+            await GetDataAsync<EventAssetLookup>(new string[] { "EventsImagesLookup", "" });
         }
 
         private async Task GetDataAsync<TModel>(string[] binds) 

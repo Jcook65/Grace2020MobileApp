@@ -9,10 +9,18 @@ namespace Grace2020.Navigation
 {
     public class NavigationService
     {
-        public static async Task GoToAsync(string uri, ObservableObject bindingContext, bool isAnimated = false)
+        public static void GoTo(string uri, ObservableObject bindingContext, bool isAnimated = false)
         {
-            await Shell.Current.GoToAsync(uri, isAnimated);
-            Shell.Current.CurrentItem.BindingContext = bindingContext;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Shell.Current.GoToAsync(uri, isAnimated);
+                Shell.Current.CurrentItem.BindingContext = bindingContext;
+            });
+        }
+
+        public static void GoTo(string uri, bool isAnimated = false)
+        {
+            Device.BeginInvokeOnMainThread(async () => await Shell.Current.GoToAsync(uri, isAnimated));
         }
     }
 }

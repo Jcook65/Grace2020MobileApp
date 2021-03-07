@@ -15,22 +15,22 @@ namespace Grace2020.Models.Tables
         [PrimaryKey]
         public string NewsId { get; set; }
         public DateTime Date { get; set; }
-        public string TitleText { get; set; }
-        public string NewsText { get; set; }
+        public string Title { get; set; }
+        public string Body { get; set; }
 
         [OneToMany]
-        public List<ImageLookup> ImageLookups { get; set; }
+        public List<NewsAssetLookup> Assets { get; set; }
 
         [Ignore]
         public string FormattedDate { get { return Date.ToString("MMMM dd", App.GetCultureInfo()); } }
         [Ignore]
-        public string TruncatedNews { get { return string.Concat(NewsText.Substring(0, NewsText.Length > 185 ? 185 : (int)(NewsText.Length * .25)).TrimEnd(), "..."); } }
+        public string TruncatedNews { get { return string.Concat(Body.Substring(0, Body.Length > 185 ? 185 : (int)(Body.Length * .25)).TrimEnd(), "..."); } }
         [Ignore]
         public List<SelectableItemVM> Images 
         { 
             get
             {
-                return ImageLookups?.Select(i => new SelectableItemVM(i.ImageName))?.ToList();
+                return Assets?.Select(i => new SelectableItemVM(i))?.ToList();
             } 
         }
 
@@ -39,8 +39,7 @@ namespace Grace2020.Models.Tables
         {
             get 
             { 
-                var img = Images?.FirstOrDefault();
-                return img != null ? string.Format(Constants.GRACE2020NewsImageUrl, img.Item as string) : "";
+                return Assets.FirstOrDefault()?.AssetUrl;
             }
         }
     }

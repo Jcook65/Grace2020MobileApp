@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Grace2020.Views.Collections.ModulesVW"
+             xmlns:translate="clr-namespace:Grace2020.MarkupExtensions"
+             xmlns:effects="clr-namespace:Grace2020.Effects"
+             BackgroundColor="{DynamicResource NavigationPrimary}"
+             x:Name="this">
+    <ContentPage.Content>
+        <ContentView>
+            <ScrollView>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="40*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Grid.Row="0">
+                        <Image x:Name="logo"
+                               Source="LOGOtransparent.png"
+                               HeightRequest="100"
+                               WidthRequest="200"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Opacity="0"
+                               Margin="0,0,0,20"/>
+
+                        <Label x:Name="greetingEN"
+                               Text="{Binding ENGreeting}"
+                               TextTransform="Uppercase"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Style="{StaticResource LabelHeader1Style}"
+                               TextColor="White"
+                               Opacity="0">
+                            <Label.Effects>
+                                <effects:LabelShadowEffect Color="Black"
+                                                           Radius="5"
+                                                           DistanceX="5"
+                                                           DistanceY="5"/>
+                            </Label.Effects>
+                        </Label>
+                        <Label x:Name="greetingJA"
+                               Text="{Binding JAGreeting}"
+                               TextTransform="Uppercase"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               TextColor="White"
+                               Style="{StaticResource LabelHeader1Style}"
+                               Opacity="0">
+                            <Label.Effects>
+                                <effects:LabelShadowEffect Color="Black"
+                                                           Radius="5"
+                                                           DistanceX="5"
+                                                           DistanceY="5"/>
+                            </Label.Effects>
+                        </Label>
+
+                        <Label x:Name="date"
+                               Text="{Binding Date}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontSize="Small"
+                               TextColor="White"
+                               Style="{StaticResource LabelHeader3Style}"
+                               Opacity="0">
+                            <Label.Effects>
+                                <effects:LabelShadowEffect Color="Black"
+                                                           Radius="5"
+                                                           DistanceX="5"
+                                                           DistanceY="5"/>
+                            </Label.Effects>
+                        </Label>
+                    </StackLayout>
+                    <Label Text="{translate:Translate Text=JumpBackIn}"
+                           Style="{StaticResource LabelHeader2Style}"
+                           IsVisible="{Binding JumpBackInEnabled}"
+                           TextTransform="Uppercase"
+                           HorizontalOptions="Center"
+                           VerticalOptions="End"
+                           Grid.Row="1"
+                           Opacity="0"
+                           x:Name="jumpBackIn"
+                           TextColor="White">
+                        <Label.Effects>
+                            <effects:LabelShadowEffect Color="Black"
+                                                           Radius="5"
+                                                           DistanceX="5"
+                                                           DistanceY="5"/>
+                        </Label.Effects>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding JumpBackIn}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <StackLayout BindableLayout.ItemsSource="{Binding Modules}"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Start"
+                                 Grid.Row="2"
+                                 Opacity="0"
+                                 x:Name="modulesList">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView HorizontalOptions="Center"
+                                             VerticalOptions="Center">
+                                    <Label Text="{Binding ModuleName}"
+                                           Style="{StaticResource LabelHeader3Style}"
+                                           FontSize="Small"
+                                           TextColor="White"
+                                           TextTransform="Uppercase"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"
+                                           Margin="20">
+                                        <Label.Effects>
+                                            <effects:LabelShadowEffect Color="Black"
+                                                           Radius="5"
+                                                           DistanceX="5"
+                                                           DistanceY="5"/>
+                                        </Label.Effects>
+                                    </Label>
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.NavigateToPrayerHome, Source={x:Reference this}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </ContentView.GestureRecognizers>
+                                </ContentView>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </Grid>
+            </ScrollView>
+        </ContentView>
+    </ContentPage.Content>
+</ContentPage>

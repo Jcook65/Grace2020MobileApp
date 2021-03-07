@@ -40,7 +40,7 @@ namespace Grace2020.Utils
             var db = await FileSystem.Current.GetFileFromPathAsync(Path.Combine(
                             System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
                             Xamarin.Forms.DependencyService.Get<ISQLite>().DatabaseName));
-            db?.DeleteAsync().Wait();
+            //db?.DeleteAsync().Wait();
 
             using (var dbUtil = new DbUtil())
             {

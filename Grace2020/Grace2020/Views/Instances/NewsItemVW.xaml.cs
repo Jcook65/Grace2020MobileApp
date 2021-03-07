@@ -1,5 +1,6 @@
 ﻿using FFImageLoading.Forms;
 using Grace2020.Models.Tables;
+using Grace2020.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Grace2020.Views.Instances
         public NewsItemVW()
         {
             InitializeComponent();
+            newsImage.CacheKeyFactory = new Utils.CustomCacheKeyFactory();
         }
 
         protected override void OnBindingContextChanged()
@@ -25,7 +27,7 @@ namespace Grace2020.Views.Instances
             newsImage.Source = null;
             if(BindingContext is News item)
             {
-                newsImage.Source = item.ImageSourceURL;
+                Device.BeginInvokeOnMainThread(() => newsImage.Source = item.ImageSourceURL);
             }
         }
     }

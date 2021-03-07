@@ -47,15 +47,13 @@ namespace Grace2020.ViewModels.Collections
         {
             var webService = new WebService();
             await webService.GetNewsAsync();
-            await webService.GetImageLookupAsync();
+            await webService.GetNewsAssetLookupAsync();
             NewsPosts = await LoadModelsAsync<News>(getChildren:true, recursive:true);
         }
 
-        private async void OnItemSelected(object sender, News e)
+        private void OnItemSelected(object sender, News e)
         {
-            var news = new NewsDetailVM(e);
-            await NavigationService.GoToAsync(ViewLocator.NewsDetailPage, news);
+            NavigationService.GoTo($"{ViewLocator.NewsDetailPage}?newsid={e.NewsId}");
         }
-
     }
 }

@@ -11,6 +11,6 @@ namespace Grace2020.Resources
         public static string GRACE2020ServiceUrl = BaseAddress + "/app/mobile/{0}";
         public static string GRACE2020NewsImageUrl = BaseAddress + "/app/images/NewsImages/{0}";
         public static string GRACE2020EventImageUrl = BaseAddress + "/app/images/EventImages/{0}";
-        public static string GRACE2020RegionImageUrl = BaseAddress + "/app/images/RegionImages/{0}";
+        public static string GRACE2020ImageUrl = BaseAddress + "/app/images/getImage.php";
     }
 }

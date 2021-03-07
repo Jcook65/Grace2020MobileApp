@@ -30,17 +30,14 @@
                                 </OnPlatform>
                             </Grid.Margin>
                             <Label Text="{trns:Translate Text=Events}"
-                                   Style="{DynamicResource LabelHeader1Style}"
-                                   HorizontalOptions="Center"/>
+                                   Style="{DynamicResource PageTitleStyle}"/>
                         </Grid>
                     </ContentView>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <iviews:EventItemVW/>
-                            </StackLayout>
+                            <iviews:EventItemVW/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -51,6 +48,18 @@
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                x:Name="activityIndicator"/>
+
+            <Label Text="{trns:Translate Text=NoEvents}"
+                   Style="{DynamicResource NoItemsLabelStyle}"
+                   IsVisible="False">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding Events.Count}"
+                                 Value="0">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

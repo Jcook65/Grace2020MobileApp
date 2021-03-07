@@ -26,8 +26,16 @@ namespace Grace2020.iOS
             global::Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental");
             Xamarin.Forms.Forms.Init();
             CardsViewRenderer.Preserve();
+
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageSourceHandler();
+            var config = new FFImageLoading.Config.Configuration
+            {
+                DiskCacheDuration = new TimeSpan(30, 0, 0, 0),
+                ExecuteCallbacksOnUIThread = true
+            };
+            FFImageLoading.ImageService.Instance.Initialize(config);
+
             LoadApplication(new App());
             UINavigationBar.Appearance.Translucent = false;
             return base.FinishedLaunching(app, options);

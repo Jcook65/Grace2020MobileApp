@@ -118,13 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="About" xml:space="preserve">
-    <value>約</value>
+    <value>このアプリについて</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
     <value>お問い合わせ</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>継続する</value>
+    <value>次へ</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>ダークモード</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>英語</value>
@@ -138,11 +141,17 @@
   <data name="Home" xml:space="preserve">
     <value>ホーム</value>
   </data>
+  <data name="InfoCAP" xml:space="preserve">
+    <value>情報</value>
+  </data>
   <data name="Japanese" xml:space="preserve">
     <value>日本語</value>
   </data>
+  <data name="JumpBackIn" xml:space="preserve">
+    <value>中断したところから再開する</value>
+  </data>
   <data name="MoreInfo" xml:space="preserve">
-    <value>より詳しい情報</value>
+    <value>詳細</value>
   </data>
   <data name="News" xml:space="preserve">
     <value>ニュース</value>
@@ -151,19 +160,19 @@
     <value>現在、イベントはありません。ごめんなさい！</value>
   </data>
   <data name="NoInformationAvailable" xml:space="preserve">
-    <value>申し訳ありませんが、現時点で利用可能な情報はありません</value>
+    <value>申し訳ありませんが、今のところ新たな情報はありません</value>
   </data>
   <data name="NoMoreInfoAvailable" xml:space="preserve">
-    <value>現在、これ以上の情報はありません</value>
+    <value>現在、新たな情報はありません</value>
   </data>
   <data name="NoPrayerAvailable" xml:space="preserve">
-    <value>現在、祈りはありません</value>
+    <value>現在、祈りの課題はありません</value>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
   </data>
   <data name="OurVision" xml:space="preserve">
-    <value>私たちのビジョン</value>
+    <value>ビジョン</value>
   </data>
   <data name="Prayer" xml:space="preserve">
     <value>祈り</value>
@@ -178,21 +187,19 @@
     <value>県</value>
   </data>
   <data name="Region" xml:space="preserve">
-    <value>領域</value>
+    <value>地域</value>
   </data>
   <data name="RegionCAP" xml:space="preserve">
-    <value>領域</value>
+    <value>地域</value>
   </data>
   <data name="SearchForPrefecture" xml:space="preserve">
-    <value>都道府県を検索する</value>
+    <value>都道府県を検索</value>
   </data>
   <data name="VisionStatement" xml:space="preserve">
-    <value>オリンピック聖火が日本のすべての地域を通過するように、私たちは６月９日から９月６日まで「GRACE２０２０〜９０日間の祈り〜」キャンペーンを行います。日本のあらゆる場所で聖霊が働くように祈ります。聖霊が火の柱としてモーセとイスラエル人を砂漠に導いたと聖書に書いてあります。そして五旬節の日に聖霊が火の舌として人々のところに来て、多くの言語で話せるようにしました。この火は、神の民を通して、あらゆる国民、部族、民族、言語に広がっています。日本各地で1万人がオリンピック聖火を運ぶのは、神の民が日本のあらゆる地域で聖霊を運ぶことをイメージさせます。
-
-聖霊が日本で働くように祈ってください。神がオリンピックのエネルギーと興奮を通して、福音のメッセージを広めるように祈ってください。真の希望と命を与える光を多くの人々が知るように祈ってください。</value>
+    <value>「GRACE2020～90日間の祈り」キャンペーンにご参加ください。このキャンペーンで聖霊が日本のあらゆる場所で働くように共に祈ります。旧約聖書には、聖霊が火柱となりモーセとイスラエルの人々を砂漠に導いたとあります。この炎は砂漠の中の道しるべとなっただけではなく、これから果たされる約束をあらわしました。そしてペンテコステ（五旬節）の日には、聖霊が炎のような舌となって信徒の上に降りてきて、人々は多くの言語で語り始めました。この炎は神の民を通して、あらゆる国民、部族、民族に広がっています。オリンピックの聖火が2020年3月に到着しました。日本各地で1万人のランナーががオリンピックの聖火を運ぶのは、神の民が日本のあらゆる地域で聖霊を運ぶこととイメージが重なります。東京2020オリンピック＆パラリンピック大会は、2011年の東日本大震災の復興を記念して計画されました。震災からちょうど10年になる節目の年のオリンピックはどうなるのでしょうか。聖霊が火柱と炎のような舌となったことが思い出されます。神が福音のメッセージを広めるように祈ってください。かつて聖霊の火柱が砂漠の中で道しるべとなったように、神の福音が被災地や日本の暗闇を照らす光となるように共にお祈りください。</value>
   </data>
   <data name="WeblinkError" xml:space="preserve">
-    <value>申し訳ありませんが、このリンクを開くときに問題が発生しました。</value>
+    <value>リンクエラー</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>ようこそ</value>

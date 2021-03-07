@@ -10,10 +10,12 @@ namespace Grace2020.Models.Tables
     public class Event : IModel
     {
         [PrimaryKey]
-        public long EventId { get; set; }
+        public string EventId { get; set; }
         public string Title { get; set; }
         public string Body { get; set; }
-        public string Weblink { get; set; }
+        public DateTime? ActiveDate { get; set; }
+        public DateTime? DeactiveDate { get; set; }
+        public string URL { get; set; }
         public DateTime EventStartDate { get; set; }
         public DateTime EventEndDate { get; set; }
 
@@ -34,6 +36,6 @@ namespace Grace2020.Models.Tables
         }
 
         [OneToOne(CascadeOperations = CascadeOperation.All)]
-        public EventImageLookup EventImage { get; set; }
+        public EventAssetLookup EventImage { get; set; }
     }
 }

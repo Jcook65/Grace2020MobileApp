@@ -5,16 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Grace2020.Views.Instances.NewsDetailsVW"
+             x:Name="this"
              xmlns:cntrl="clr-namespace:Grace2020.Views.Instances"
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:cc="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+             xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
              Shell.NavBarIsVisible="True"
+             Title="{trns:Translate Text=News}"
              BackgroundColor="{DynamicResource NavigationPrimary}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="cc:CircleFrame" x:Key="SelectedStyle">
-                <Setter Property="BackgroundColor" Value="{DynamicResource GracePink}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource GraceLightColor}"/>
                 <Setter Property="Opacity" Value=".65"/>
             </Style>
             <Style TargetType="cc:CircleFrame" x:Key="UnselectedStyle">
@@ -25,45 +28,66 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Never">
-            <StackLayout Spacing="0">
-                <cards:CoverFlowView x:Name="pictureCarousel"
-                                    IsCyclical="True"
-                                    Opacity="1"
-                                    VerticalOptions="Center"
-                                    HeightRequest="300"
-                                    Margin="0,5,0,0"
-                                    Grid.Row="0">
-                    <x:Arguments>
-                        <proc:BaseCoverFlowFrontViewProcessor ScaleFactor="0.75" OpacityFactor="0.25"/>
-                        <proc:BaseCoverFlowBackViewProcessor ScaleFactor="0.75" OpacityFactor="0.25"/>
-                    </x:Arguments>
+            <Frame BackgroundColor="{DynamicResource NavigationSecondary}"
+                   CornerRadius="20"
+                   Margin="20,40">
+                <Grid RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Spacing="0"
+                                 Grid.Row="0">
+                        <CarouselView x:Name="pictureCarousel"
+                                      VerticalOptions="Center"
+                                      Loop="True"
+                                      IndicatorView="indicatorView"
+                                      HeightRequest="300"
+                                      Margin="0,0,0,10">
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"
+                                                   SnapPointsAlignment="Center"
+                                                   SnapPointsType="MandatorySingle"/>
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentView HorizontalOptions="Center"
+                                                 VerticalOptions="Center">
+                                        <cntrl:RoundedNewsImageVW HorizontalOptions="Center"/>
+                                    </ContentView>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView x:Name="indicatorView"
+                                   IndicatorColor="{DynamicResource NavigationForeground}"
+                                   SelectedIndicatorColor="{DynamicResource GraceLightColor}"
+                                   VerticalOptions="Start"
+                                   IndicatorsShape="Circle"
+                                   HorizontalOptions="Center"/>            
+                    </StackLayout>
 
-                    <cc:IndicatorsControl x:Name="indicatorsView"
-                                          SelectedIndicatorStyle="{DynamicResource SelectedStyle}"
-                                          UnselectedIndicatorStyle="{DynamicResource UnselectedStyle}"/>
-
-                    <cards:CoverFlowView.ItemTemplate>
-                        <DataTemplate>
-                            <ContentView HorizontalOptions="Center"
-                                         VerticalOptions="Center">
-                                <cntrl:RoundedNewsImageVW Margin="20"/>
-                            </ContentView>
-                        </DataTemplate>
-                    </cards:CoverFlowView.ItemTemplate>
-                </cards:CoverFlowView>
-
-                <StackLayout Spacing="0"
-                             Margin="30,0,30,10"
-                             Grid.Row="1">
-                    <Label Text="{Binding News.TitleText}"
-                                   Style="{DynamicResource LabelHeader1Style}"/>
-                    <Label Text="{Binding News.FormattedDate}"
+                    
+                    <StackLayout Spacing="0"
+                                 Grid.Row="1">
+                        <StackLayout Spacing="0"
+                                     Margin="10,20,10,10"
+                                     Grid.Row="1">
+                            <Label Text="{Binding News.Title}"
+                                   Style="{DynamicResource LabelHeader1Style}"
+                                   TextColor="{DynamicResource DarkTextColor}"
+                                   TextTransform="Uppercase"/>
+                            <Label Text="{Binding News.FormattedDate}"
                                    Style="{DynamicResource LabelHeader3Style}"
+                                   TextColor="{DynamicResource DarkTextColor}"
                                    Margin="0,0,0,20"/>
-                    <Label Text="{Binding News.NewsText}"
+                            <Label Text="{Binding News.Body}"
+                                   TextColor="{DynamicResource DarkTextColor}"
                                    Style="{DynamicResource LabelStyle}"/>
-                </StackLayout>
-            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>                    
+                </Grid>
+
+            </Frame>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

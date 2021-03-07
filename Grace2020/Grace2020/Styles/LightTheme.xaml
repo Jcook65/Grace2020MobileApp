@@ -4,16 +4,20 @@
                     x:Class="Grace2020.Styles.LightTheme"
                     Source="BaseTheme.xaml">
     <!-- COLORS -->
-    <Color x:Key="NavigationPrimary">#FFFFFFFF</Color>
-    <Color x:Key="NavigationPrimaryDarker">#FFFFFFFF</Color>
-    <Color x:Key="NavigationForeground">#000000</Color>
+    <Color x:Key="NavigationPrimary">#7CAFD4</Color>
+    <Color x:Key="NavigationSecondary">#FFFFFF</Color>
+    <Color x:Key="NavigationPrimaryDarker">#7CAFD4</Color>
+    <Color x:Key="NavigationForeground">#1B365D</Color>
     <Color x:Key="GracePink">#ED1D66</Color>
     <Color x:Key="GracePurple">#91479B</Color>
     <Color x:Key="GraceDarkPurple">#663748</Color>
+    <Color x:Key="GraceLightColor">#7CAFD4</Color>
+    <Color x:Key="GraceDarkColor">#1B365D</Color>
     <Color x:Key="BorderColor">#000000</Color>
-    <Color x:Key="TitleTextColor">#393939</Color>
-    <Color x:Key="ParagraphTextColor">#707070</Color>
+    <Color x:Key="TitleTextColor">#FFFFFF</Color>
+    <Color x:Key="ParagraphTextColor">#FFFFFF</Color>
     <Color x:Key="LightTextColor">#FFFFFF</Color>
+    <Color x:Key="DarkTextColor">#000000</Color>
 
    
 </ResourceDictionary>

@@ -6,18 +6,60 @@
              mc:Ignorable="d"
              x:Class="Grace2020.Views.Instances.EventItemVW"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Name="this"
-                      BackgroundColor="{DynamicResource NavigationPrimary}">
-  <ContentView.Content>
-        <Grid Margin="10">
+             BackgroundColor="{DynamicResource NavigationPrimary}">
+    <ContentView.Content>
+        <Frame CornerRadius="20"
+               BackgroundColor="{DynamicResource NavigationSecondary}"
+               Margin="20,10"
+               HasShadow="True">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Frame CornerRadius="20"
+                       Padding="0"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,0,0,10">
+
+                    <ff:CachedImage x:Name="eventImage"
+                                    RetryDelay="600"
+                                    LoadingPlaceholder="loadingImage.jpg"
+                                    FadeAnimationForCachedImages="False"
+                                    HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="CenterAndExpand"
+                                    Aspect="AspectFit"/>
+                </Frame>
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center">
+                    <Label Text="{Binding Title}"
+                           Style="{DynamicResource LabelHeader1Style}"
+                           TextColor="{DynamicResource DarkTextColor}"
+                           TextTransform="Uppercase"/>
+                    <Label Text="{Binding FormattedDate}"
+                           Style="{DynamicResource LabelHeader3Style}"
+                           TextColor="{DynamicResource DarkTextColor}"
+                           Margin="0,0,0,10"
+                           FontSize="16"/>
+                    <Label Text="{Binding Body}"
+                           TextColor="{DynamicResource DarkTextColor}"
+                           Style="{DynamicResource LabelStyle}"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+
+        <!--<Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ff:CachedImage x:Name="eventImage"
-                            CacheDuration="30"
                             CacheType="Memory"
+                            CacheKeyFactory="{StaticResource CustomCacheKeyFactory}"
                             LoadingPlaceholder="loadingImage.jpg"
                             FadeAnimationEnabled="True"
                             FadeAnimationDuration="400"
@@ -56,6 +98,6 @@
                        HorizontalOptions="Start"
                        Style="{DynamicResource LabelStyle}"/>
             </StackLayout>
-        </Grid>
+        </Grid>-->
     </ContentView.Content>
 </ContentView>

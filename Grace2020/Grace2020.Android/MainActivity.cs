@@ -12,8 +12,7 @@ namespace Grace2020.Droid
     [Activity(Label = "Grace2020",
         ScreenOrientation = ScreenOrientation.Portrait, 
         Theme = "@style/SplashTheme", 
-        Icon = "@drawable/Grace2020",
-        RoundIcon = "@drawable/Grace2020_Circle",
+        Icon = "@drawable/icon",
         MainLauncher = true, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -31,12 +30,12 @@ namespace Grace2020.Droid
             {
                 try
                 {
-                    System.Diagnostics.Debug.WriteLine($"\t***FATAL UNHANDLED EXCEPTION***: \n\t{args.ToString()}");
+                    System.Diagnostics.Debug.WriteLine($"\t***FATAL UNHANDLED EXCEPTION***: \n\t{args}");
                 }
                 catch(Exception ex)
                 {
                     //this shouldn't happen.
-                    System.Diagnostics.Debug.WriteLine($"\tHow did you get here? {ex.ToString()}");
+                    System.Diagnostics.Debug.WriteLine($"\tHow did you get here? {ex}");
                 }
                 finally
                 {
@@ -51,6 +50,13 @@ namespace Grace2020.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CardsViewRenderer.Preserve();
+
+            var config = new FFImageLoading.Config.Configuration
+            {
+                DiskCacheDuration = new TimeSpan(30, 0, 0, 0),
+                ExecuteCallbacksOnUIThread = true
+            };
+            FFImageLoading.ImageService.Instance.Initialize(config);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             FFImageLoading.Forms.Platform.CachedImageRenderer.InitImageViewHandler();
 
@@ -58,8 +64,14 @@ namespace Grace2020.Droid
             Window.AddFlags(WindowManagerFlags.LayoutInScreen);
 
             //ProviderInstaller.InstallIfNeeded(getApplicationContext())
-
             LoadApplication(new App());
+        }
+
+        public override void OnLowMemory()
+        {
+            base.OnLowMemory();
+            System.Diagnostics.Debug.WriteLine($"***INVALIDATING FFIMAGE LOADING IMAGE CACHE DUE TO LOW MEMORY***");
+            FFImageLoading.ImageService.Instance.InvalidateMemoryCache();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

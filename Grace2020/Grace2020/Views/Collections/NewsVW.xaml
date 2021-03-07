@@ -30,17 +30,14 @@
                                 </OnPlatform>
                             </Grid.Margin>
                             <Label Text="{trns:Translate Text=News}"
-                                   Style="{DynamicResource LabelHeader1Style}"
-                                   HorizontalOptions="Center"/>
+                                   Style="{DynamicResource PageTitleStyle}"/>
                         </Grid>
                     </ContentView>
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout>
-                                <ivw:NewsItemVW/>
-                            </StackLayout>
+                            <ivw:NewsItemVW/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -49,6 +46,17 @@
                                IsRunning="{Binding IsBusy}"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"/>
+            <Label Text="{trns:Translate Text=NoInformationAvailable}"
+                   Style="{DynamicResource NoItemsLabelStyle}"
+                   IsVisible="False">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding NewsPosts.Count}"
+                                 Value="0">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

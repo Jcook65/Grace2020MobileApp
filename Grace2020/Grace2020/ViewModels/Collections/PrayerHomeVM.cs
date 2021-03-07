@@ -7,6 +7,7 @@ using Grace2020.Services;
 using Grace2020.Utils;
 using Grace2020.ViewModels.Abstractions;
 using Grace2020.ViewModels.Instances;
+using SQLiteNetExtensionsAsync.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,7 +21,9 @@ namespace Grace2020.ViewModels.Collections
 {
     public class PrayerHomeVM : AbstractCollectionVM
     {
-        private ModulesLookup _selectedModulesLookup;
+        private Module _selectedModule;
+
+        private static ModulesLookup _selectedModulesLookup;
         public ModulesLookup SelectedModulesLookup
         {
             get { return _selectedModulesLookup; }
@@ -35,33 +38,11 @@ namespace Grace2020.ViewModels.Collections
             }
         }
 
-        private Module _selectedModule;
-        public Module SelectedModule
+        private ObservableCollection<ModulesLookup> _topics;
+        public ObservableCollection<ModulesLookup> Topics
         {
-            get { return _selectedModule; }
-            set 
-            {
-                var previous = SelectedModule;
-                Set(() => SelectedModule, ref _selectedModule, value);
-                if(SelectedModule != previous)
-                {
-                    ModuleSelected?.Invoke(this, new EventArgs());
-                }
-            }
-        }
-
-        private ObservableCollection<ModulesLookup> _prayers;
-        public ObservableCollection<ModulesLookup> Prayers
-        {
-            get { return _prayers; }
-            set { Set(() => Prayers, ref _prayers, value); }
-        }
-
-        private ObservableCollection<Module> _modules;
-        public ObservableCollection<Module> Modules
-        {
-            get { return _modules; }
-            set { Set(() => Modules, ref _modules, value); }
+            get { return _topics; }
+            set { Set(() => Topics, ref _topics, value); }
         }
 
         private string _searchCriteria;
@@ -80,44 +61,45 @@ namespace Grace2020.ViewModels.Collections
 
         public RelayCommand Search { get; private set; }
 
-        public event EventHandler ModulesLoaded;
         public event EventHandler<ModulesLookup> ModulesLookupSelected;
-        public event EventHandler ModuleSelected;
-        public event EventHandler PrayersLoaded;
+        public event EventHandler TopicsLoaded;
 
         public PrayerHomeVM()
         {
             SetSearchCommand();
-            ModulesLoaded += OnModulesLoaded;
-            ModuleSelected += OnModuleSelected;
-            PrayersLoaded += OnPrayersLoaded;
+            TopicsLoaded += OnTopicsLoaded;
         }
 
-        public PrayerHomeVM(ModulesLookup prayer)
+        public PrayerHomeVM(Module module)
         {
             SetSearchCommand();
-            SelectedModulesLookup = prayer;
-            ModulesLoaded += OnModulesLoaded;
-            ModuleSelected += OnModuleSelected;
-            PrayersLoaded += OnPrayersLoaded;
+            _selectedModule = module;
+            _selectedModulesLookup = null;
+            TopicsLoaded += OnTopicsLoaded;
+            ModulesLookupSelected += OnModuleLookupSelected;
+        }
+
+        public PrayerHomeVM(ModulesLookup moduleLookup)
+        {
+            SetSearchCommand();
+            _selectedModulesLookup = moduleLookup;
+            TopicsLoaded += OnTopicsLoaded;
+            ModulesLookupSelected += OnModuleLookupSelected;
         }
 
         protected override async Task LoadItems()
         {
             var webService = new WebService();
+            await webService.GetTopicsAsync();
             await webService.GetPrayersAsync();
             await webService.GetModulesLookupAsync();
-            await webService.GetModulesAsync();
-
-            Modules = await LoadModelsAsync<Module>();
-            ModulesLoaded?.Invoke(this, new EventArgs());
-            await LoadPrayers();
+            await LoadTopics();
         }
 
-        private async Task LoadPrayers()
+        private async Task LoadTopics()
         {
-            Prayers = await LoadModelsAsync(BuildWhereClause(), getChildren: true, recursive: true);
-            PrayersLoaded?.Invoke(this, new EventArgs());
+            Topics = await LoadModelsAsync(BuildWhereClause(), orderBy:i => i.Sequence, getChildren: true, recursive: true);
+            TopicsLoaded?.Invoke(this, new EventArgs());
         }
 
         private void SetSearchCommand()
@@ -128,8 +110,8 @@ namespace Grace2020.ViewModels.Collections
                 {
                     Searching = true;
                     SearchCriteria = SearchCriteria.Trim();
-                    var prayer = Prayers.ToList().Find(i => i.Prayer.TitleText.ToUpper().Contains(SearchCriteria.ToUpper()));
-                    SelectedModulesLookup = prayer ?? SelectedModulesLookup;
+                    var topic = Topics.ToList().Find(i => i.Topic.Title.ToUpper().Contains(SearchCriteria.ToUpper()));
+                    SelectedModulesLookup = topic ?? SelectedModulesLookup;
                     Searching = false;
                     SearchCriteria = null;
                 }
@@ -138,28 +120,50 @@ namespace Grace2020.ViewModels.Collections
 
         private Expression<Func<ModulesLookup, bool>> BuildWhereClause()
         {
-            Expression<Func<ModulesLookup, bool>> expression = i => i.ModuleId == 1;
-            if(SelectedModule != null)
+            Expression<Func<ModulesLookup, bool>> expression = i => i.ModuleId == "Alphabetical";
+            
+            if(_selectedModulesLookup != null)
             {
-                expression = i => i.ModuleId == SelectedModule.ModuleId;
+                expression = i => i.ModuleId == _selectedModulesLookup.ModuleId;
+            }
+            else if(_selectedModule?.ModuleId != null)
+            {
+                expression = i => i.ModuleId == _selectedModule.ModuleId;
             }
 
             return expression;
         }
 
-        private void OnModulesLoaded(object sender, EventArgs e)
+        private void OnTopicsLoaded(object sender, EventArgs e)
         {
-            SelectedModule = Modules?.FirstOrDefault();
+            Task.Run(async () =>
+            {
+                using (var db = new DbUtil())
+                {
+                    var config = await CurrentUserUtil.GetCurrentUserConfigurationAsync();
+                    ModulesLookup moduleLookup = null;
+                    if (config != null && config.CurrentTopicId != null && (Topics?.Any(i => i.ModuleLookupId == config.CurrentTopicId) ?? false))
+                    {
+
+                        moduleLookup = await db.AsyncConnection.FindAsync<ModulesLookup>(i => i.ModuleLookupId == config.CurrentTopicId);
+                    }
+                    else
+                    {
+                        moduleLookup = Topics?.Where(i => i.Date.HasValue && i.Date.Value.Date == DateTime.Now.Date).FirstOrDefault() ?? Topics?.FirstOrDefault();
+                    }
+
+                    if(moduleLookup != null) await db.AsyncConnection.GetChildrenAsync(moduleLookup, recursive:true);
+                    SelectedModulesLookup = moduleLookup;
+                }
+            });
         }
 
-        private void OnModuleSelected(object sender, EventArgs e)
+        private void OnModuleLookupSelected(object sender, ModulesLookup e)
         {
-            Task.Run(async () => await LoadPrayers());
-        }
-
-        private void OnPrayersLoaded(object sender, EventArgs e)
-        {
-            SelectedModulesLookup = Prayers?.Where(i => i.Date.HasValue && i.Date.Value.Date == DateTime.Now.Date).FirstOrDefault() ?? Prayers?.FirstOrDefault();
+            if(e != null)
+            {
+                Task.Run(async () => await CurrentUserUtil.UpdateCurrentUserConfigAsync(e.ModuleId, e.ModuleLookupId));
+            }
         }
     }
 }

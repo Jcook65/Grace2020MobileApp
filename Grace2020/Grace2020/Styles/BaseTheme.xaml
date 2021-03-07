@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                    xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:utils="clr-namespace:Grace2020.Utils"
                     x:Class="Grace2020.Styles.BaseTheme">
     <!-- Fonts -->
     <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
@@ -9,21 +11,25 @@
     </OnPlatform>
 
     <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
-        <On Platform="iOS" Value="Rounded Mplus 1c Bold"/>
-        <On Platform="Android" Value="MPLUSRounded1c-Bold.ttf#Rounded Mplus 1c Bold"/>
+        <On Platform="iOS" Value="Rounded Mplus 1c ExtraBold"/>
+        <On Platform="Android" Value="MPLUSRounded1c-ExtraBold.ttf#Rounded Mplus 1c ExtraBold"/>
     </OnPlatform>
 
     <!-- COLORS -->
-    <Color x:Key="NavigationPrimary">#FFFFFFFF</Color>
-    <Color x:Key="NavigationPrimaryDarker">#FFFFFFFF</Color>
-    <Color x:Key="NavigationForeground">#000000</Color>
+    <Color x:Key="NavigationPrimary">#7CAFD4</Color>
+    <Color x:Key="NavigationSecondary">#FFFFFF</Color>
+    <Color x:Key="NavigationPrimaryDarker">#7CAFD4</Color>
+    <Color x:Key="NavigationForeground">#1B365D</Color>
     <Color x:Key="GracePink">#ED1D66</Color>
     <Color x:Key="GracePurple">#91479B</Color>
     <Color x:Key="GraceDarkPurple">#663748</Color>
+    <Color x:Key="GraceLightColor">#7CAFD4</Color>
+    <Color x:Key="GraceDarkColor">#1B365D</Color>
     <Color x:Key="BorderColor">#000000</Color>
-    <Color x:Key="TitleTextColor">#000000</Color>
-    <Color x:Key="ParagraphTextColor">#000000</Color>
+    <Color x:Key="TitleTextColor">#FFFFFF</Color>
+    <Color x:Key="ParagraphTextColor">#FFFFFF</Color>
     <Color x:Key="LightTextColor">#FFFFFF</Color>
+    <Color x:Key="DarkTextColor">#000000</Color>
 
     <!--STACKLAYOUTS-->
     <Style TargetType="StackLayout"
@@ -36,6 +42,11 @@
     <Style TargetType="SearchBar">
         <Setter Property="FontFamily" Value="{DynamicResource NormalFont}"/>
     </Style>
+
+    <!--<Style TargetType="ff:CachedImage">
+        <Setter Property="DownsampleToViewSize" Value="True"/>
+    </Style>-->
+    
 
     <!--========================================LABELS=======================================-->
 
@@ -102,5 +113,39 @@
                 </OnPlatform>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="Label" 
+           x:Key="PageTitleStyle" 
+           BasedOn="{StaticResource LabelHeader1Style}">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="42"/>
+                    <On Platform="iOS" Value="40"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="TextTransform" Value="Uppercase"/>
+        <Setter Property="CharacterSpacing" Value="2"/>
+    </Style>
+
+    <Style TargetType="Label"
+           BasedOn="{StaticResource LabelStyle}"
+           x:Key="NoItemsLabelStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="18"/>
+                    <On Platform="iOS" Value="16"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+        <Setter Property="Margin" Value="40"/>
+        <Setter Property="LineBreakMode" Value="WordWrap"/>
+        <Setter Property="HorizontalTextAlignment" Value="Center"/>
     </Style>
 </ResourceDictionary>

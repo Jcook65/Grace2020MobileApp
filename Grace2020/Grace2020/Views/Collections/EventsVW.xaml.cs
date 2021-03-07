@@ -25,26 +25,34 @@ namespace Grace2020.Views.Collections
             };
         }
 
-        protected override async void OnBindingContextChanged()
+        protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             if(BindingContext is EventsVM vm)
             {
-                await vm.Load();
                 vm.OpenWeblinkUnsuccessful += OnWeblinkFailure;
             }
         }
 
-        private async void OnWeblinkFailure(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK);
+            base.OnAppearing();
+            if(BindingContext is EventsVM vm)
+            {
+                Task.Run(async () => await vm.Load());
+            }
+        }
+
+        private void OnWeblinkFailure(object sender, EventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK));
         }
 
         private void eventList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if(BindingContext is EventsVM vm && e.Item is Event et)
             {
-                vm.OpenWebsite.Execute(et.Weblink);
+                vm.OpenWebsite.Execute(et.URL);
             }
         }
     }

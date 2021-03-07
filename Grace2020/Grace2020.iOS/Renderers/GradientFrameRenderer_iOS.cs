@@ -19,7 +19,6 @@ namespace Grace2020.iOS.Renderers
     {
         public override void Draw(CGRect rect)
         {
-            base.Draw(rect);
             if(Element is GradientFrame frame)
             {
                 CGColor startColor = frame.StartColor.ToCGColor();
@@ -28,35 +27,38 @@ namespace Grace2020.iOS.Renderers
 
                 var gradientLayer = new CAGradientLayer()
                 {
-                    StartPoint = new CGPoint(0, 0.5),
-                    EndPoint = new CGPoint(1, 0.5)
+                    StartPoint = new CGPoint(0, 0),
+                    EndPoint = new CGPoint(1, 1),
+                    Frame = rect,
+                    Colors = new CGColor[] { startColor, middleColor, endColor }
                 };
-                gradientLayer.Frame = rect;
-                gradientLayer.Colors = new CGColor[] { startColor, middleColor, endColor };
+                NativeView.Layer.BackgroundColor = UIColor.Clear.CGColor;
                 NativeView.Layer.InsertSublayer(gradientLayer, 0);
             }
+
+            base.Draw(rect);
         }
 
         //public override void LayoutSubviews()
         //{
         //    base.LayoutSubviews();
-        //    if (Element is CustomFrame frame)
+        //    if (Element is GradientFrame frame)
         //    {
         //        UpdateCornerRadius();
         //    }
         //}
-
+        //
         //protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         //{
         //    base.OnElementPropertyChanged(sender, e);
-
-        //    if (e.PropertyName == nameof(CustomFrame.CornerRadius) ||
-        //        e.PropertyName == nameof(CustomFrame))
+        //
+        //    if (e.PropertyName == nameof(GradientFrame.CornerRadius) ||
+        //        e.PropertyName == nameof(GradientFrame))
         //    {
         //        UpdateCornerRadius();
         //    }
         //}
-
+        //
         //private double RetrieveCommonCornerRadius(CornerRadius cornerRadius)
         //{
         //    var commonCornerRadius = cornerRadius.TopLeft;
@@ -72,53 +74,53 @@ namespace Grace2020.iOS.Renderers
         //            }
         //        }
         //    }
-
+        //
         //    return commonCornerRadius;
         //}
-
+        //
         //private UIRectCorner RetrieveRoundedCorners(CornerRadius cornerRadius)
         //{
         //    var roundedCorners = default(UIRectCorner);
-
+        //
         //    if (cornerRadius.TopLeft > 0)
         //    {
         //        roundedCorners |= UIRectCorner.TopLeft;
         //    }
-
+        //
         //    if (cornerRadius.TopRight > 0)
         //    {
         //        roundedCorners |= UIRectCorner.TopRight;
         //    }
-
+        //
         //    if (cornerRadius.BottomLeft > 0)
         //    {
         //        roundedCorners |= UIRectCorner.BottomLeft;
         //    }
-
+        //
         //    if (cornerRadius.BottomRight > 0)
         //    {
         //        roundedCorners |= UIRectCorner.BottomRight;
         //    }
-
+        //
         //    return roundedCorners;
         //}
-
+        //
         //private void UpdateCornerRadius()
         //{
-        //    var cornerRadius = (Element as CustomFrame)?.CornerRadius;
+        //    var cornerRadius = (Element as GradientFrame)?.CornerRadius;
         //    if (!cornerRadius.HasValue)
         //    {
         //        return;
         //    }
-
+        //
         //    var roundedCornerRadius = RetrieveCommonCornerRadius(cornerRadius.Value);
         //    if (roundedCornerRadius <= 0)
         //    {
         //        return;
         //    }
-
+        //
         //    var roundedCorners = RetrieveRoundedCorners(cornerRadius.Value);
-
+        //
         //    var path = UIBezierPath.FromRoundedRect(Bounds, roundedCorners, new CGSize(roundedCornerRadius, roundedCornerRadius));
         //    var mask = new CAShapeLayer { Path = path.CGPath };
         //    NativeView.Layer.Mask = mask;

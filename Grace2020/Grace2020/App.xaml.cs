@@ -12,6 +12,8 @@ using Grace2020.Navigation;
 using Grace2020.Views.Collections;
 using Grace2020.Views.Instances;
 using System.ComponentModel;
+using FFImageLoading.Forms;
+using Grace2020.Styles;
 
 namespace Grace2020
 {
@@ -27,6 +29,20 @@ namespace Grace2020
 
         public App()
         {
+            if(Device.RuntimePlatform == Device.Android)
+            {
+                Task.Run( async () =>
+                {
+                    var config = await CurrentUserUtil.GetCurrentUserConfigurationAsync();
+                    if(config.AppTheme == 1)
+                    {
+                        Current.Resources = new DarkTheme();
+                        AppTheme = Themes.Dark;
+                    }
+                });
+            }
+
+
             InitializeComponent();
 
             System.Diagnostics.Debug.WriteLine("====== resource debug info =========");
@@ -77,8 +93,8 @@ namespace Grace2020
 
         private void RegisterPages()
         {
-            Routing.RegisterRoute(ViewLocator.DayPicker, typeof(DayPickerVW));
             Routing.RegisterRoute(ViewLocator.NewsDetailPage, typeof(NewsDetailsVW));
+            Routing.RegisterRoute(ViewLocator.ImageViewerPage, typeof(ImageViewerVW));
         }
         private void RegisterDependencies()
         {

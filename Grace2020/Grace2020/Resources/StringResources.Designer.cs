@@ -133,11 +133,29 @@ namespace Grace2020.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to INFO.
+        /// </summary>
+        public static string InfoCAP {
+            get {
+                return ResourceManager.GetString("InfoCAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Japanese.
         /// </summary>
         public static string Japanese {
             get {
                 return ResourceManager.GetString("Japanese", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jump back in.
+        /// </summary>
+        public static string JumpBackIn {
+            get {
+                return ResourceManager.GetString("JumpBackIn", resourceCulture);
             }
         }
         

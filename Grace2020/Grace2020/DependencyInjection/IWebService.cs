@@ -9,6 +9,6 @@ namespace Grace2020.DependencyInjection
     {
         Task GetPrayersAsync();
         Task GetNewsAsync();
-        Task GetImageLookupAsync();
+        Task GetNewsAssetLookupAsync();
     }
 }

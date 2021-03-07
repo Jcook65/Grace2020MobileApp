@@ -17,19 +17,24 @@ namespace Grace2020.Views.Collections
         public NewsVW()
         {
             InitializeComponent();
+            Device.BeginInvokeOnMainThread(() => newsList.Opacity = 0);
             BindingContext = new NewsVM();
-            (BindingContext as NewsVM).Loaded += OnLoaded;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            newsList.Opacity = 0;
+            if(BindingContext is NewsVM vm)
+            {
+                vm.Loaded += OnLoaded;
+            }
+            Task.Run(async () => await (BindingContext as NewsVM)?.Load());
         }
 
         private void OnLoaded(object sender, SuccessEventArgs e)
         {
-            Device.BeginInvokeOnMainThread(() => InvalidateMeasure());
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await (BindingContext as NewsVM)?.Load();
+            Device.BeginInvokeOnMainThread(async () => await newsList.FadeTo(1, easing: Easing.CubicInOut));
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

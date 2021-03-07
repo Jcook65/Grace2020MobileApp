@@ -1,5 +1,6 @@
 ﻿using Grace2020.Resources;
 using Grace2020.Styles;
+using Grace2020.Utils;
 using Grace2020.ViewModels.Instances;
 using System;
 using System.Collections.Generic;
@@ -28,17 +29,25 @@ namespace Grace2020.Views.Instances
             {
                 vm.OpenWeblinkUnsuccessful += OnWebLinkFailure;
                 vm.OpenEmailUnsuccessful += OnEmailFailure;
+                if (App.AppTheme == Themes.Dark)
+                {
+                    vm.IsDarkModeEnabled = true;
+                }
+                else
+                {
+                    vm.IsDarkModeEnabled = false;
+                }
             }
         }
 
-        private async void OnWebLinkFailure(object sender, EventArgs e)
+        private void OnWebLinkFailure(object sender, EventArgs e)
         {
-            await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK);
+            Device.BeginInvokeOnMainThread(async () => await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK));
         }
 
-        private async void OnEmailFailure(object sender, EventArgs e)
+        private void OnEmailFailure(object sender, EventArgs e)
         {
-            await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK);
+            Task.Run(async () => await DisplayAlert(StringResources.Error, StringResources.WebLinkError, StringResources.OK));
         }
 
         private void DarkModeToggled(object sender, ToggledEventArgs e)
@@ -55,6 +64,8 @@ namespace Grace2020.Views.Instances
                     App.Current.Resources = new LightTheme();
                     App.AppTheme = Themes.Light;
                 }
+
+                Task.Run(async () => await CurrentUserUtil.UpdateCurrentUserConfigAsync((int)App.AppTheme));
             }
         }
     }

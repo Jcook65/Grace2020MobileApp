@@ -29,7 +29,7 @@ namespace Grace2020.iOS.Renderers
             UITabBar myTabBar = controller.TabBar;
             foreach(var child in myTabBar.Items)
             {
-                child.ImageInsets = new UIEdgeInsets(10, 0, -10, 0);
+                child.ImageInsets = new UIEdgeInsets(5, 0, -5, 0);
             }
         }
     }

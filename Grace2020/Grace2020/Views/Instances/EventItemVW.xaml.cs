@@ -1,6 +1,8 @@
 ﻿using Grace2020.Models.Tables;
+using Grace2020.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace Grace2020.Views.Instances
         public EventItemVW()
         {
             InitializeComponent();
+            eventImage.CacheKeyFactory = new CustomCacheKeyFactory();
         }
 
         protected override void OnBindingContextChanged()
@@ -24,7 +27,7 @@ namespace Grace2020.Views.Instances
             eventImage.Source = null;
             if(BindingContext is Event evt)
             {
-                eventImage.Source = evt.EventImage?.ImageURL;
+                Device.BeginInvokeOnMainThread(() => eventImage.Source = evt.EventImage?.AssetUrl);
             }
         }
     }

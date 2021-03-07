@@ -141,8 +141,14 @@
   <data name="Home" xml:space="preserve">
     <value>HOME</value>
   </data>
+  <data name="InfoCAP" xml:space="preserve">
+    <value>INFO</value>
+  </data>
   <data name="Japanese" xml:space="preserve">
     <value>Japanese</value>
+  </data>
+  <data name="JumpBackIn" xml:space="preserve">
+    <value>Jump back in</value>
   </data>
   <data name="MoreInfo" xml:space="preserve">
     <value>MORE INFO</value>
