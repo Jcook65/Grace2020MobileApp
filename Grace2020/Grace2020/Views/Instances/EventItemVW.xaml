@@ -8,47 +8,65 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Name="this"
              BackgroundColor="{DynamicResource NavigationPrimary}">
+    <!--<ContentView.MinimumHeightRequest>
+        <OnPlatform x:TypeArguments="x:Double" iOS="500" Android="-1"/>
+    </ContentView.MinimumHeightRequest>-->
     <ContentView.Content>
         <Frame CornerRadius="20"
                BackgroundColor="{DynamicResource NavigationSecondary}"
                Margin="20,10"
+               IsClippedToBounds="True"
                HasShadow="True">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
                 </Grid.RowDefinitions>
                 <Frame CornerRadius="20"
                        Padding="0"
                        Grid.Row="0"
                        HorizontalOptions="Center"
-                       VerticalOptions="Center"
+                       VerticalOptions="Fill"
+                       IsClippedToBounds="True"
                        Margin="0,0,0,10">
 
                     <ff:CachedImage x:Name="eventImage"
                                     RetryDelay="600"
                                     LoadingPlaceholder="loadingImage.jpg"
                                     FadeAnimationForCachedImages="False"
-                                    HorizontalOptions="CenterAndExpand"
-                                    VerticalOptions="CenterAndExpand"
-                                    Aspect="AspectFit"/>
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Fill">
+                        <ff:CachedImage.Aspect>
+                            <OnPlatform x:TypeArguments="Aspect">
+                                <On Platform="Android" Value="AspectFit"/>
+                                <On Platform="iOS" Value="AspectFill"/>
+                            </OnPlatform>
+                        </ff:CachedImage.Aspect>
+                        <ff:CachedImage.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="400" Android="400"/>
+                        </ff:CachedImage.HeightRequest>
+                    </ff:CachedImage>
                 </Frame>
-                <StackLayout Grid.Row="1"
-                             HorizontalOptions="Start"
-                             VerticalOptions="Center">
-                    <Label Text="{Binding Title}"
-                           Style="{DynamicResource LabelHeader1Style}"
-                           TextColor="{DynamicResource DarkTextColor}"
-                           TextTransform="Uppercase"/>
-                    <Label Text="{Binding FormattedDate}"
-                           Style="{DynamicResource LabelHeader3Style}"
-                           TextColor="{DynamicResource DarkTextColor}"
-                           Margin="0,0,0,10"
-                           FontSize="16"/>
-                    <Label Text="{Binding Body}"
-                           TextColor="{DynamicResource DarkTextColor}"
-                           Style="{DynamicResource LabelStyle}"/>
-                </StackLayout>
+                <ContentView Grid.Row="1">
+                    <StackLayout HorizontalOptions="Start"
+                                 VerticalOptions="Center">
+                        <StackLayout.Margin>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="0,10" Android="0"/>
+                        </StackLayout.Margin>
+                        <Label Text="{Binding Title}"
+                               Style="{DynamicResource LabelHeader1Style}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               TextTransform="Uppercase"/>
+                        <Label Text="{Binding FormattedDate}"
+                               Style="{DynamicResource LabelHeader3Style}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               Margin="0,0,0,10"
+                               FontSize="16"/>
+                        <Label Text="{Binding Body}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               Style="{DynamicResource LabelStyle}"/>
+                    </StackLayout>
+                </ContentView>
             </Grid>
         </Frame>
 

@@ -7,10 +7,14 @@
              x:Class="Grace2020.Views.Instances.NewsItemVW"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              BackgroundColor="{DynamicResource NavigationPrimary}">
+    <!--<ContentView.MinimumHeightRequest>
+        <OnPlatform x:TypeArguments="x:Double" iOS="500" Android="-1"/>
+    </ContentView.MinimumHeightRequest>-->
     <ContentView.Content>
         <Frame CornerRadius="20"
                BackgroundColor="{DynamicResource NavigationSecondary}"
                Margin="20, 10"
+               IsClippedToBounds="True"
                HasShadow="True">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
@@ -21,14 +25,24 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Fill"
                        CornerRadius="20"
+                       IsClippedToBounds="True"
                        Margin="0,0,0,10">
                     <ff:CachedImage x:Name="newsImage"
                                     RetryDelay="600"
                                     LoadingPlaceholder="loadingImage.jpg"
                                     FadeAnimationForCachedImages="False"
-                                    HorizontalOptions="CenterAndExpand"
-                                    VerticalOptions="CenterAndExpand"
-                                    Aspect="AspectFit"/>                    
+                                    HorizontalOptions="Fill"
+                                    VerticalOptions="Fill">
+                        <ff:CachedImage.Aspect>
+                            <OnPlatform x:TypeArguments="Aspect">
+                                <On Platform="Android" Value="AspectFit"/>
+                                <On Platform="iOS" Value="AspectFill"/>
+                            </OnPlatform>
+                        </ff:CachedImage.Aspect>
+                        <ff:CachedImage.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="400" Android="400"/>
+                        </ff:CachedImage.HeightRequest>
+                    </ff:CachedImage>
                 </Frame>
 
                 <StackLayout Grid.Row="1"

@@ -8,25 +8,33 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
     <ContentView.Content>
-        <ff:CachedImage LoadingPlaceholder="loadingImage.jpg"
-                        CacheType="Memory"
-                        FadeAnimationEnabled="True"
-                        FadeAnimationDuration="200"
-                        FadeAnimationForCachedImages="False"
-                        TransformPlaceholders="True"
-                        x:Name="newsImage"
-                        Aspect="AspectFit"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center">
-            <ff:CachedImage.Transformations>
-                <fftransform:CornersTransformation CornersTransformType="AllRounded"
-                                                   CropHeightRatio="0"
-                                                   CropWidthRatio="0"
-                                                   TopLeftCornerSize="20"
-                                                   TopRightCornerSize="20"
-                                                   BottomLeftCornerSize="20"
-                                                   BottomRightCornerSize="20"/>
-            </ff:CachedImage.Transformations>
-        </ff:CachedImage>
+        <Frame Padding="0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               CornerRadius="20"
+               IsClippedToBounds="True"
+               Margin="2">
+            <ff:CachedImage LoadingPlaceholder="loadingImage.jpg"
+                            CacheType="Memory"
+                            FadeAnimationEnabled="True"
+                            FadeAnimationDuration="200"
+                            FadeAnimationForCachedImages="False"
+                            TransformPlaceholders="True"
+                            x:Name="newsImage"
+                            Aspect="AspectFit"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill">
+                <!--<ff:CachedImage.Transformations>
+                    <fftransform:CornersTransformation CornersTransformType="AllRounded"
+                                                       CropHeightRatio="0"
+                                                       CropWidthRatio="0"
+                                                       TopLeftCornerSize="20"
+                                                       TopRightCornerSize="20"
+                                                       BottomLeftCornerSize="20"
+                                                       BottomRightCornerSize="20"/>
+                </ff:CachedImage.Transformations>-->
+            </ff:CachedImage>            
+        </Frame>
+
     </ContentView.Content>
 </ContentView>

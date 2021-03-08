@@ -25,13 +25,11 @@
             <Setter Property="CornerRadius" Value="20,20,0,0"/>
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="WidthRequest" Value="150"/>
-            
         </Style>
 
         <cnvrt:StringIsNotNullOrEmptyConverter x:Key="notNull"/>
     </cntrl:ThemedContentPage.Resources>
     <cntrl:ThemedContentPage.Content>
-
         <Grid RowSpacing="0"
               ColumnSpacing="0"
               x:Name="mainContainer">
@@ -268,9 +266,10 @@
                 </cntrl:CornerRadiusFrame>
 
                 <cntrl:CornerRadiusFrame Style="{DynamicResource BodyStyle}"
-                                   Grid.Row="1"
-                                   x:Name="regionBody"
-                                   BackgroundColor="{DynamicResource NavigationSecondary}">
+                                         Grid.Row="1"
+                                         x:Name="regionBody"
+                                         BackgroundColor="{DynamicResource NavigationSecondary}"
+                                         VerticalOptions="FillAndExpand">
 
                 </cntrl:CornerRadiusFrame>
                 <Grid Grid.Row="1"
@@ -285,8 +284,9 @@
                     </Grid.RowDefinitions>
                     <Image Source="downArrow_darkGray.png"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center"
+                           VerticalOptions="End"
                            Grid.Row="0"
+                           Margin="0,30,0,0"
                            x:Name="regionArrow">
                         <Image.Triggers>
                             <DataTrigger TargetType="Image"
@@ -308,7 +308,7 @@
                         <ScrollView.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="iOS" Value="800"/>
-                                <On Platform="Android" Value="650"/>
+                                <On Platform="Android" Value="700"/>
                             </OnPlatform>
                         </ScrollView.HeightRequest>
                         <StackLayout>
@@ -335,6 +335,9 @@
                                                 VerticalOptions="Center"
                                                 Margin="20"/>
                             </Frame>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="RegionTapped"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </ScrollView>
                 </Grid>
@@ -363,11 +366,20 @@
                         </OnPlatform>
                     </cntrl:CornerRadiusFrame.TranslationY>
                     <Label Text="{trns:Translate Text=PrayerCAP}"
+                           x:Name="prayerTab"
                            CharacterSpacing="2"
                            Style="{DynamicResource LabelHeader1Style}"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                 </cntrl:CornerRadiusFrame>
+                <Grid Grid.Row="1" x:Name="prayerMask" BackgroundColor="{DynamicResource NavigationSecondary}">
+                    <Grid.Margin>
+                        <OnPlatform x:TypeArguments="Thickness">
+                            <On Platform="iOS" Value="0,2,0,0"/>
+                            <On Platform="Android" Value="0"/>
+                        </OnPlatform>
+                    </Grid.Margin>
+                </Grid>
                 <cntrl:CornerRadiusFrame Style="{DynamicResource BodyStyle}"
                                    BackgroundColor="{DynamicResource NavigationPrimary}"
                                    Grid.Row="1"
@@ -385,6 +397,7 @@
                     <Image Source="downArrow_darkGray.png"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
+                           Margin="0,20,0,0"
                            Grid.Row="0"
                            x:Name="prayerArrow">
                         <Image.HeightRequest>
@@ -433,6 +446,9 @@
                                     </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PrayerTapped"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </ScrollView>
                     <!--<ScrollView x:Name="prayerScrollView"
