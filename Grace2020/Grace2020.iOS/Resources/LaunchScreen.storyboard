@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X5k-f2-b5h" launchScreen="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -12,37 +15,26 @@
                         <viewControllerLayoutGuide type="top" id="1299"/>
                         <viewControllerLayoutGuide type="bottom" id="1300"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yd7-JS-zBw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" id="yd7-JS-zBw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="466" translatesAutoresizingMaskIntoConstraints="NO" image="splashscreen.png">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="tintColor" colorSpace="calibratedRGB" red="0.4" green="0.21568627450980393" blue="0.28235294117647058" alpha="1"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                </accessibility>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="GRACE2020transparent.png" translatesAutoresizingMaskIntoConstraints="NO" id="V2S-6E-twf">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <constraints>
-                            <constraint id="467" firstItem="466" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
-                            <constraint id="468" firstItem="466" firstAttribute="top" secondItem="yd7-JS-zBw" secondAttribute="top"/>
-                            <constraint id="469" firstItem="466" firstAttribute="leading" secondItem="yd7-JS-zBw" secondAttribute="leading"/>
-                            <constraint id="470" firstAttribute="trailing" secondItem="466" secondAttribute="trailing"/>
-                            <constraint id="471" firstItem="1300" firstAttribute="bottom" secondItem="466" secondAttribute="bottom"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.48627450980392156" green="0.68627450980392157" blue="0.83137254901960778" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <nil key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="347" y="574"/>
+            <point key="canvasLocation" x="346.37681159420293" y="573.88392857142856"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.40000000000000002" green="0.21568627450980393" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
-        <image name="splashscreen.png" width="480" height="800"/>
+        <image name="GRACE2020transparent.png" width="36" height="26.639999389648438"/>
     </resources>
-    <color key="tintColor" colorSpace="calibratedRGB" red="0.4" green="0.21568627450980393" blue="0.28235294117647058" alpha="1"/>
 </document>
