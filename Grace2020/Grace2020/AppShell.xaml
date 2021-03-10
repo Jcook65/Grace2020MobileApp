@@ -41,19 +41,19 @@
     <TabBar FlyoutDisplayOptions="AsMultipleItems">
         <ShellContent ContentTemplate="{DataTemplate cViews:PrayerHomeVW}"
                       Route="Home"
-                      Icon="homeButton_lightGray.png"/>
+                      Icon="HomeIcon.png"/>
 
         <ShellContent ContentTemplate="{DataTemplate cViews:NewsVW}"
                       Route="News"
-                      Icon="newsButton_lightGray.png"/>
+                      Icon="NewsIcon.png"/>
 
         <ShellContent ContentTemplate="{DataTemplate cViews:EventsVW}"
                       Route="Events"
-                      Icon="eventsButton_lightGray.png"/>
+                      Icon="EventsIcon.png"/>
 
         <ShellContent ContentTemplate="{DataTemplate iViews:AboutVW}"
                       Route="About"
-                      Icon="ABOUT_ICON.png"/>
+                      Icon="InfoIcon.png"/>
     </TabBar>
 
     <Shell.ItemTemplate>

@@ -14,7 +14,7 @@
     <AssemblyName>Grace2020.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <ProvisioningType>automatic</ProvisioningType>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,7 +65,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignKey>Apple Distribution: Jonathan Cook (V2TA2U66UG)</CodesignKey>
     <CodesignEntitlements>
     </CodesignEntitlements>
     <CodesignProvision>Grace2020Distro</CodesignProvision>
@@ -147,6 +147,60 @@
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_1024px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_120px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_120px1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_152px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_167px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_180px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_20px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_29px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_40px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_40px1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_40px2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_58px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_58px1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_60px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_76px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_80px.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_80px1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\GRACE2020ios_87px.png">
       <Visible>false</Visible>
     </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -253,61 +307,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\29X29_IOS.png">
-      <Link>Resources\29X29_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\40X40_IOS.png">
-      <Link>Resources\40X40_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\58X58_IOS.png">
-      <Link>Resources\58X58_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\76X76_IOS.png">
-      <Link>Resources\76X76_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\80X80_IOS.png">
-      <Link>Resources\80X80_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\87X87_IOS.png">
-      <Link>Resources\87X87_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\120X120_IOS.png">
-      <Link>Resources\120X120_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\152X152_IOS.png">
-      <Link>Resources\152X152_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\167X167_IOS.png">
-      <Link>Resources\167X167_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\1024X1024_IOS.png">
-      <Link>Resources\1024X1024_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\60X60_IOS.png">
-      <Link>Resources\60X60_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\splashscreen.png" />
   </ItemGroup>
   <ItemGroup>
@@ -381,16 +380,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\20X20_IOS.png">
-      <Link>Resources\20X20_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\Assets\images\iOS\180X180_IOS.png">
-      <Link>Resources\180X180_IOS.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\20X20_IOS.png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -438,6 +427,26 @@
   <ItemGroup>
     <BundleResource Include="..\..\Assets\images\LOGOtransparent.png">
       <Link>Resources\LOGOtransparent.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\iOS\EventsIcon.png">
+      <Link>Resources\EventsIcon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\iOS\HomeIcon.png">
+      <Link>Resources\HomeIcon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\iOS\InfoIcon.png">
+      <Link>Resources\InfoIcon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\iOS\NewsIcon.png">
+      <Link>Resources\NewsIcon.png</Link>
     </BundleResource>
   </ItemGroup>
   <ProjectExtensions>

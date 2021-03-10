@@ -14,8 +14,10 @@
         <ScrollView HorizontalOptions="Center"
                     HorizontalScrollBarVisibility="Never">
             <StackLayout HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         Margin="0,30,0,0">
+                         VerticalOptions="Center">
+                <StackLayout.Margin>
+                    <OnPlatform x:TypeArguments="Thickness" iOS="0" Android="0,30,0,0"/>
+                </StackLayout.Margin>
                 <Grid HorizontalOptions="Center">
                     <Grid.Margin>
                         <OnPlatform x:TypeArguments="Thickness">
@@ -39,7 +41,7 @@
                        BackgroundColor="{DynamicResource NavigationSecondary}">
                     <StackLayout HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                        <Frame CornerRadius="20"
+                        <!--<Frame CornerRadius="20"
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                HeightRequest="100"
@@ -50,13 +52,13 @@
                                     <GradientStop Color="{DynamicResource GraceLightColor}" Offset="0.1"/>
                                     <GradientStop Color="{DynamicResource GraceDarkColor}" Offset="1.0"/>
                                 </LinearGradientBrush>
-                            </Frame.Background>
+                            </Frame.Background>-->
                             <Image x:Name="logo"
-                                   Source="LOGOtransparent.png"
+                                   Source="GRACE2020_ABOUT.png"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center"
                                    Margin="10"/>
-                        </Frame>
+                        <!--</Frame>-->
                         
                         
                         <Label Text="{trns:Translate Text=VisionStatement}"

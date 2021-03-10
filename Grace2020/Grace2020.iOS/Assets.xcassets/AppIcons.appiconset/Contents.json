@@ -3,92 +3,110 @@
     {
       "scale": "2x",
       "size": "20x20",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_40px.png"
     },
     {
       "scale": "3x",
       "size": "20x20",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_60px.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_58px.png"
     },
     {
       "scale": "3x",
       "size": "29x29",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_87px.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_80px.png"
     },
     {
       "scale": "3x",
       "size": "40x40",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_120px.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_120px1.png"
     },
     {
       "scale": "3x",
       "size": "60x60",
-      "idiom": "iphone"
+      "idiom": "iphone",
+      "filename": "GRACE2020ios_180px.png"
     },
     {
       "scale": "1x",
       "size": "20x20",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_20px.png"
     },
     {
       "scale": "2x",
       "size": "20x20",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_40px1.png"
     },
     {
       "scale": "1x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_29px.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_58px1.png"
     },
     {
       "scale": "1x",
       "size": "40x40",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_40px2.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_80px1.png"
     },
     {
       "scale": "1x",
       "size": "76x76",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_76px.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_152px.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
-      "idiom": "ipad"
+      "idiom": "ipad",
+      "filename": "GRACE2020ios_167px.png"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
-      "idiom": "ios-marketing"
+      "idiom": "ios-marketing",
+      "filename": "GRACE2020ios_1024px.png"
     }
   ],
   "properties": {},

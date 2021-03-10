@@ -233,7 +233,7 @@
                            Placeholder="{trns:Translate Text=SearchForPrefecture}"
                            BackgroundColor="{DynamicResource NavigationPrimary}"
                            PlaceholderColor="{DynamicResource NavigationForeground}"
-                           TextColor="{DynamicResource LightTextColor}"
+                           TextColor="{DynamicResource DarkTextColor}"
                            CancelButtonColor="{DynamicResource NavigationForeground}"
                            Grid.Column="1"/>
             </Grid>
@@ -286,8 +286,10 @@
                            HorizontalOptions="Center"
                            VerticalOptions="End"
                            Grid.Row="0"
-                           Margin="0,30,0,0"
                            x:Name="regionArrow">
+                        <!--<Image.Margin>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0" Android="0,30,0,0"/>
+                        </Image.Margin>-->
                         <Image.Triggers>
                             <DataTrigger TargetType="Image"
                                          Binding="{Binding AppTheme}"
@@ -305,6 +307,9 @@
                     </Image>
                     <ScrollView x:Name="regionScrollView"
                                 Grid.Row="1">
+                        <ScrollView.Margin>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,100" Android="0,0,0,10"/>
+                        </ScrollView.Margin>
                         <ScrollView.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="iOS" Value="800"/>
@@ -319,6 +324,7 @@
                                        Margin="40,40,40,50"/>
                             <Frame CornerRadius="20"
                                    Margin="40,0,40,90"
+                                   HasShadow="False"
                                    x:Name="imageFrame">
                                 <Frame.Background>
                                     <LinearGradientBrush>
@@ -335,9 +341,10 @@
                                                 VerticalOptions="Center"
                                                 Margin="20"/>
                             </Frame>
-                            <StackLayout.GestureRecognizers>
+                            <!--<StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="RegionTapped"/>
-                            </StackLayout.GestureRecognizers>
+                                <PanGestureRecognizer PanUpdated="OnInfoPanUpdated" TouchPoints="1"/>
+                            </StackLayout.GestureRecognizers>-->
                         </StackLayout>
                     </ScrollView>
                 </Grid>
@@ -389,7 +396,8 @@
                 <Grid Grid.Row="1"
                       RowSpacing="0"
                       HorizontalOptions="Center"
-                      VerticalOptions="Start">
+                      VerticalOptions="Start"
+                      x:Name="prayerText">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -397,9 +405,11 @@
                     <Image Source="downArrow_darkGray.png"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
-                           Margin="0,20,0,0"
                            Grid.Row="0"
                            x:Name="prayerArrow">
+                        <!--<Image.Margin>
+                            <OnPlatform x:TypeArguments="Thickness" iOS="0,50,0,0" Android="0,30,0,0"/>
+                        </Image.Margin>-->
                         <Image.HeightRequest>
                             <OnPlatform x:TypeArguments="x:Double">
                                 <On Platform="Android" Value="30"/>
@@ -446,9 +456,10 @@
                                     </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
-                            <StackLayout.GestureRecognizers>
+                            <!--<StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="PrayerTapped"/>
-                            </StackLayout.GestureRecognizers>
+                                <PanGestureRecognizer PanUpdated="OnPrayerPanUpdated" TouchPoints="1"/>
+                            </StackLayout.GestureRecognizers>-->
                         </StackLayout>
                     </ScrollView>
                     <!--<ScrollView x:Name="prayerScrollView"

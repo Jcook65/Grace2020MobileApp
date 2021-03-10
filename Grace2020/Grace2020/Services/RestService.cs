@@ -17,6 +17,9 @@ namespace Grace2020.Services
     public class RestService : IRestService
     {
         private static SemaphoreSlim _configSemaphore = new SemaphoreSlim(1, 1);
+
+        //public event EventHandler Errored;
+        
         public RestService()
         {
         }
@@ -67,8 +70,7 @@ namespace Grace2020.Services
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-                throw ex;
+                Debug.WriteLine($"\tERROR {ex.Message}");
             }
         }
     }

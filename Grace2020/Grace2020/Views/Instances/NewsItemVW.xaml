@@ -25,6 +25,7 @@
                        HorizontalOptions="Center"
                        VerticalOptions="Fill"
                        CornerRadius="20"
+                       HasShadow="False"
                        IsClippedToBounds="True"
                        Margin="0,0,0,10">
                     <ff:CachedImage x:Name="newsImage"
@@ -40,7 +41,7 @@
                             </OnPlatform>
                         </ff:CachedImage.Aspect>
                         <ff:CachedImage.HeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double" iOS="400" Android="400"/>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="{OnIdiom Phone=-1, Tablet=400}" Android="-1"/>
                         </ff:CachedImage.HeightRequest>
                     </ff:CachedImage>
                 </Frame>

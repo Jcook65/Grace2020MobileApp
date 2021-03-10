@@ -12,6 +12,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Center"
                CornerRadius="20"
+               HasShadow="False"
                IsClippedToBounds="True"
                Margin="2">
             <ff:CachedImage LoadingPlaceholder="loadingImage.jpg"

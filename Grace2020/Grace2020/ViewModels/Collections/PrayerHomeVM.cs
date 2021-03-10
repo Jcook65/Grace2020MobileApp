@@ -110,7 +110,8 @@ namespace Grace2020.ViewModels.Collections
                 {
                     Searching = true;
                     SearchCriteria = SearchCriteria.Trim();
-                    var topic = Topics.ToList().Find(i => i.Topic.Title.ToUpper().Contains(SearchCriteria.ToUpper()));
+                    var topic = Topics.ToList().Find(i => i.Topic.Title.ToUpper().Contains(SearchCriteria.ToUpper())
+                                                          || (int.TryParse(SearchCriteria, out int seq) && i.Sequence == seq));
                     SelectedModulesLookup = topic ?? SelectedModulesLookup;
                     Searching = false;
                     SearchCriteria = null;

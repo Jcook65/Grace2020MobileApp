@@ -138,6 +138,7 @@ namespace Grace2020.Views.Collections
         {
             //if(_prayerHomeState != PrayerHomeState.RegionExpanded)
             //{
+            //regionArrow.IsVisible = true;
                 var prayerLowerBound = Device.RuntimePlatform == "iOS"
                     ? mainContainer.Height / 1.3 : mainContainer.Height / 1.15;
                 Debug.WriteLine("Entering Expand Region Animation");
@@ -157,7 +158,9 @@ namespace Grace2020.Views.Collections
                     regionArrow.FadeTo(1, length, easing),
                     regionScrollView.FadeTo(1, length, easing),
                     prayerMask.FadeTo(1, length, easing),
-                    imageFrame.FadeTo(1, length, easing));
+                    imageFrame.FadeTo(1, length, easing),
+                    regionText.TranslateTo(regionText.X, 50, length, easing),
+                    prayerText.TranslateTo(prayerText.X, 0, length, easing));
                 PrayerHomeStateChanged?.Invoke(this, PrayerHomeState.RegionExpanded);
                 Debug.WriteLine("Exiting Expand Region Animation");
             //}
@@ -167,6 +170,7 @@ namespace Grace2020.Views.Collections
         {
             //if(_prayerHomeState != PrayerHomeState.PrayerExpanded)
             //{
+            //prayerArrow.IsVisible = true;
                 Debug.WriteLine("Entering Expand Prayer Animation");
                 await Task.WhenAll(
                     searchIcon.FadeTo(0, length, easing),
@@ -184,7 +188,9 @@ namespace Grace2020.Views.Collections
                     regionArrow.FadeTo(0, length, easing),
                     regionScrollView.ScrollToAsync(0, 0, false),
                     prayerMask.FadeTo(0, length, easing),
-                    imageFrame.FadeTo(0, length, easing));
+                    imageFrame.FadeTo(0, length, easing),
+                    prayerText.TranslateTo(prayerText.X, 50, length, easing),
+                    regionText.TranslateTo(regionText.X, 0, length, easing));
                 PrayerHomeStateChanged?.Invoke(this, PrayerHomeState.PrayerExpanded);
                 Debug.WriteLine("Exiting Expand Prayer Animation");
             //}
@@ -197,7 +203,7 @@ namespace Grace2020.Views.Collections
                     searchIcon.FadeTo(1, length, easing),
                     backIcon.FadeTo(1, length, easing),
                     searchBox.TranslateTo(mainContainer.Width, 0, length, easing),
-                    //header.TranslateTo(header.X, 0, length, Easing.CubicInOut),
+                    header.TranslateTo(header.X, 0, length, Easing.CubicInOut),
                     header.FadeTo(1, length, easing),
                     region.TranslateTo(region.X, header.Height, length, easing),
                     //regionBody.ScaleYTo(1, length, Easing.CubicInOut),
@@ -210,7 +216,9 @@ namespace Grace2020.Views.Collections
                     regionScrollView.ScrollToAsync(0, 0, false),
                     regionScrollView.FadeTo(1, length, easing),
                     prayerMask.FadeTo(0, length, easing),
-                    imageFrame.FadeTo(0, length, easing));
+                    imageFrame.FadeTo(0, length, easing),
+                    prayerText.TranslateTo(prayerText.X, 0, length, easing),
+                    regionText.TranslateTo(regionText.X, 0, length, easing));
             PrayerHomeStateChanged?.Invoke(this, PrayerHomeState.Unexpanded);
             Debug.WriteLine("Exiting Unexpand Animation");
         }
@@ -265,6 +273,7 @@ namespace Grace2020.Views.Collections
                 if (e != null && BindingContext is PrayerHomeVM vm && vm.Searching)
                 {
                     await UnexpandAnimation(Convert.ToUInt32(_transitionTime * _delayFactor), Easing.CubicInOut);
+                    dayCarousel.SelectedIndex = e.SequenceIndex;
                 }
                 if (!string.IsNullOrWhiteSpace(e?.Topic?.AssetName))
                 {
@@ -319,11 +328,16 @@ namespace Grace2020.Views.Collections
         private void OnPrayerHomeStateChanged(object sender, PrayerHomeState e)
         {
             _prayerHomeState = e;
+            //var prayerTapGesture = new TapGestureRecognizer();
+            //var regionTapGesture = new TapGestureRecognizer();
+            //prayerTapGesture.Tapped += PrayerTapped;
+            //regionTapGesture.Tapped += RegionTapped;
             Device.BeginInvokeOnMainThread(() =>
             {
                 switch (e)
                 {
                     case PrayerHomeState.PrayerExpanded:
+                        //prayerText.GestureRecognizers.Add(prayerTapGesture);
                         regionScrollView.IsEnabled = false;
                         prayersList.IsEnabled = true;
                         searchIcon.IsEnabled = false;
@@ -331,6 +345,7 @@ namespace Grace2020.Views.Collections
                         dayCarousel.IsEnabled = false;
                         break;
                     case PrayerHomeState.RegionExpanded:
+                        //regionText.GestureRecognizers.Add(regionTapGesture);
                         regionScrollView.IsEnabled = true;
                         prayersList.IsEnabled = false;
                         searchIcon.IsEnabled = false;
@@ -339,11 +354,15 @@ namespace Grace2020.Views.Collections
                         break;
                     case PrayerHomeState.SearchExpanded:
                     case PrayerHomeState.Unexpanded:
+                        //regionText.GestureRecognizers.Clear();
+                        //prayerText.GestureRecognizers.Clear();
                         prayersList.IsEnabled = false;
                         regionScrollView.IsEnabled = false;
                         dayCarousel.IsEnabled = true;
                         searchIcon.IsEnabled = true;
                         backIcon.IsEnabled = true;
+                        //prayerArrow.IsVisible = false;
+                        //regionArrow.IsVisible = false;
                         break;
                 }
             });
@@ -360,6 +379,7 @@ namespace Grace2020.Views.Collections
                 switch (e.StatusType)
                 {
                     case GestureStatus.Running:
+                        //regionArrow.IsVisible = true;
                         region.TranslationY = Math.Min(Math.Max(-regionTab.Height, region.TranslationY + delta), 160);
                         //header.TranslationY = Math.Min(Math.Max(-header.Height, region.TranslationY + delta), header.Height);
                         prayerMask.Opacity = Math.Max(0, Math.Min(region.TranslationY / 160, 1));
@@ -406,6 +426,7 @@ namespace Grace2020.Views.Collections
                 switch (e.StatusType)
                 {
                     case GestureStatus.Running:
+                        //prayerArrow.IsVisible = true;
                         prayer.TranslationY = Math.Min(Math.Max(-prayerTab.Height - 10, prayer.TranslationY + delta), prayerEnd);
                         //header.TranslationY = Math.Min(Math.Max(-header.Height, prayer.TranslationY + delta), header.Height);
                         if(prayer.TranslationY < 450)

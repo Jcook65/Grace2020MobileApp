@@ -8,28 +8,27 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Name="this"
              BackgroundColor="{DynamicResource NavigationPrimary}">
-    <!--<ContentView.MinimumHeightRequest>
-        <OnPlatform x:TypeArguments="x:Double" iOS="500" Android="-1"/>
-    </ContentView.MinimumHeightRequest>-->
     <ContentView.Content>
         <Frame CornerRadius="20"
                BackgroundColor="{DynamicResource NavigationSecondary}"
-               Margin="20,10"
+               Margin="20, 10"
                IsClippedToBounds="True"
                HasShadow="True">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="{OnIdiom Phone=Auto, Tablet=70*}"/>
                     <RowDefinition Height="30*"/>
                 </Grid.RowDefinitions>
-                <Frame CornerRadius="20"
-                       Padding="0"
-                       Grid.Row="0"
+                <Frame Padding="0"
+                       HasShadow="False"
                        HorizontalOptions="Center"
-                       VerticalOptions="Fill"
+                       VerticalOptions="Center"
+                       CornerRadius="20"
                        IsClippedToBounds="True"
                        Margin="0,0,0,10">
-
+                    <Frame.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double" iOS="{OnIdiom Phone=-1, Tablet=400}" Android="-1"/>
+                    </Frame.HeightRequest>
                     <ff:CachedImage x:Name="eventImage"
                                     RetryDelay="600"
                                     LoadingPlaceholder="loadingImage.jpg"
@@ -42,80 +41,81 @@
                                 <On Platform="iOS" Value="AspectFill"/>
                             </OnPlatform>
                         </ff:CachedImage.Aspect>
-                        <ff:CachedImage.HeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double" iOS="400" Android="400"/>
-                        </ff:CachedImage.HeightRequest>
                     </ff:CachedImage>
                 </Frame>
-                <ContentView Grid.Row="1">
-                    <StackLayout HorizontalOptions="Start"
-                                 VerticalOptions="Center">
-                        <StackLayout.Margin>
-                            <OnPlatform x:TypeArguments="Thickness" iOS="0,10" Android="0"/>
-                        </StackLayout.Margin>
-                        <Label Text="{Binding Title}"
+
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center">
+                    <!--<StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0,10" Android="0"/>
+                    </StackLayout.Margin>-->
+                    <Label Text="{Binding Title}"
                                Style="{DynamicResource LabelHeader1Style}"
                                TextColor="{DynamicResource DarkTextColor}"
                                TextTransform="Uppercase"/>
-                        <Label Text="{Binding FormattedDate}"
+                    <Label Text="{Binding FormattedDate}"
                                Style="{DynamicResource LabelHeader3Style}"
                                TextColor="{DynamicResource DarkTextColor}"
                                Margin="0,0,0,10"
                                FontSize="16"/>
-                        <Label Text="{Binding Body}"
+                    <Label Text="{Binding Body}"
                                TextColor="{DynamicResource DarkTextColor}"
                                Style="{DynamicResource LabelStyle}"/>
-                    </StackLayout>
-                </ContentView>
+                </StackLayout>
             </Grid>
         </Frame>
-
-        <!--<Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <ff:CachedImage x:Name="eventImage"
-                            CacheType="Memory"
-                            CacheKeyFactory="{StaticResource CustomCacheKeyFactory}"
-                            LoadingPlaceholder="loadingImage.jpg"
-                            FadeAnimationEnabled="True"
-                            FadeAnimationDuration="400"
-                            FadeAnimationForCachedImages="False"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Start"
-                            Aspect="AspectFit"
-                            HeightRequest="150"
-                            WidthRequest="320"
-                            Grid.Row="0"
-                            Margin="10">
-                <ff:CachedImage.Transformations>
-                    <fftransform:CornersTransformation CornersTransformType="AllRounded"
-                                                       CropHeightRatio="0"
-                                                       CropWidthRatio="0"
-                                                       TopLeftCornerSize="20"
-                                                       TopRightCornerSize="20"
-                                                       BottomLeftCornerSize="20"
-                                                       BottomRightCornerSize="20"/>
-                </ff:CachedImage.Transformations>
-            </ff:CachedImage>
-            <StackLayout Grid.Row="1"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"
-                         Margin="20,10,20,10"
-                         Spacing="0">
-                <Label Text="{Binding Title}"
-                       Style="{DynamicResource LabelHeader3Style}"
-                       FontFamily="{DynamicResource BoldFont}"
-                       HorizontalOptions="Start"
-                       Margin="0,0,0,10"/>
-                <Label Text="{Binding Body}"
-                       HorizontalOptions="Start"
-                       Style="{DynamicResource LabelStyle}"/>
-                <Label Text="{Binding FormattedDate}"
-                       HorizontalOptions="Start"
-                       Style="{DynamicResource LabelStyle}"/>
-            </StackLayout>
-        </Grid>-->
     </ContentView.Content>
+    <!--<ContentView.Content>
+        <Frame CornerRadius="20"
+               BackgroundColor="{DynamicResource NavigationSecondary}"
+               Margin="20,10"
+               IsClippedToBounds="True"
+               HasShadow="True">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Frame CornerRadius="20"
+                       Padding="0"
+                       HorizontalOptions="Center"
+                       IsClippedToBounds="True"
+                       Margin="0,0,0,10">
+
+                    <ff:CachedImage x:Name="eventImage"
+                                    RetryDelay="600"
+                                    LoadingPlaceholder="loadingImage.jpg"
+                                    FadeAnimationForCachedImages="False"
+                                    Aspect="AspectFit">
+                        <ff:CachedImage.HeightRequest>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="{OnIdiom Phone=-1, Tablet=400}" Android="-1"/>
+                        </ff:CachedImage.HeightRequest>
+                        <ff:CachedImage.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="{OnIdiom Phone=-1, Tablet=500}" Android="-1"/>
+                        </ff:CachedImage.WidthRequest>
+                    </ff:CachedImage>
+                </Frame>
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="Start"
+                             VerticalOptions="Center">
+                    <StackLayout.Margin>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0,10" Android="0"/>
+                    </StackLayout.Margin>
+                    <Label Text="{Binding Title}"
+                               Style="{DynamicResource LabelHeader1Style}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               TextTransform="Uppercase"/>
+                    <Label Text="{Binding FormattedDate}"
+                               Style="{DynamicResource LabelHeader3Style}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               Margin="0,0,0,10"
+                               FontSize="16"/>
+                    <Label Text="{Binding Body}"
+                               TextColor="{DynamicResource DarkTextColor}"
+                               Style="{DynamicResource LabelStyle}"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+    </ContentView.Content>-->
 </ContentView>

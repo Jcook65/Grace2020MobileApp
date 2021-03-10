@@ -316,6 +316,26 @@
       <Link>Resources\drawable-xxxhdpi\icon.png</Link>
     </AndroidResource>
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\Assets\images\EventsIcon.png">
+      <Link>Resources\drawable\EventsIcon.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\Assets\images\HomeIcon.png">
+      <Link>Resources\drawable\HomeIcon.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\Assets\images\InfoIcon.png">
+      <Link>Resources\drawable\InfoIcon.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\Assets\images\NewsIcon.png">
+      <Link>Resources\drawable\NewsIcon.png</Link>
+    </AndroidResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
