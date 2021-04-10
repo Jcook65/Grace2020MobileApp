@@ -9,22 +9,16 @@
              xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations">
     <ContentView.Content>
         <Frame Padding="0"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill"
                CornerRadius="20"
                HasShadow="False"
                IsClippedToBounds="True"
                Margin="2">
             <ff:CachedImage LoadingPlaceholder="loadingImage.jpg"
                             CacheType="Memory"
-                            FadeAnimationEnabled="True"
-                            FadeAnimationDuration="200"
-                            FadeAnimationForCachedImages="False"
-                            TransformPlaceholders="True"
                             x:Name="newsImage"
-                            Aspect="AspectFit"
-                            HorizontalOptions="Fill"
-                            VerticalOptions="Fill">
+                            Aspect="AspectFill">
                 <!--<ff:CachedImage.Transformations>
                     <fftransform:CornersTransformation CornersTransformType="AllRounded"
                                                        CropHeightRatio="0"

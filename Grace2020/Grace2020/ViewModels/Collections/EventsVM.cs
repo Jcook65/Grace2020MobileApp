@@ -27,18 +27,16 @@ namespace Grace2020.ViewModels.Collections
             { 
                 return new RelayCommand<string>(async (link) =>
                 {
-                    var success = await WebService.OpenUri(link);
-                    if (!success)
+                    if(!string.IsNullOrWhiteSpace(link))
                     {
-                        OpenWeblinkUnsuccessful?.Invoke(this, new EventArgs());
+                        var success = await WebService.OpenUri(link);
+                        if (!success)
+                        {
+                            OpenWeblinkUnsuccessful?.Invoke(this, new EventArgs());
+                        }
                     }
                 }); 
             }
-        }
-
-        public EventsVM()
-        {
-
         }
 
         protected override async Task LoadItems()

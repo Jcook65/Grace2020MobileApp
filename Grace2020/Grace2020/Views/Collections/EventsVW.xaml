@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="Grace2020.Views.Collections.EventsVW"
              x:Name="this"
-             xmlns:iviews="clr-namespace:Grace2020.Views.Instances"
+             xmlns:ivw="clr-namespace:Grace2020.Views.Instances"
              xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
              BackgroundColor="{DynamicResource NavigationPrimary}">
     <ContentPage.Content>
@@ -14,18 +14,18 @@
               HorizontalOptions="Center">
             <ListView x:Name="eventList"
                       ItemsSource="{Binding Events}"
-                      BackgroundColor="{DynamicResource NavigationPrimary}"
-                      CachingStrategy="RecycleElement"
                       ItemTapped="eventList_ItemTapped"
-                      SeparatorVisibility="None"
                       HasUnevenRows="True"
-                      HorizontalOptions="Center">
+                      CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="Center"
+                      BackgroundColor="{DynamicResource NavigationPrimary}">
                 <ListView.Header>
                     <ContentView>
                         <Grid HorizontalOptions="Center">
                             <Grid.Margin>
                                 <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="iOS" Value="30"/>
+                                    <On Platform="iOS" Value="30,40,30,30"/>
                                     <On Platform="Android" Value="20"/>
                                 </OnPlatform>
                             </Grid.Margin>
@@ -37,7 +37,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <iviews:EventItemVW/>
+                            <ivw:EventItemVW/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

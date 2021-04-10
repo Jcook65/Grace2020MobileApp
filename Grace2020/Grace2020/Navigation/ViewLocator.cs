@@ -10,5 +10,7 @@ namespace Grace2020.Navigation
         public const string DayPicker = "DayPicker";
         public const string NewsDetailPage = "NewsDetailPage";
         public const string ImageViewerPage = "ImageViewerPage";
+        public const string ModulesPage = "Modules";
+        public const string TopicsPage = "Topics";
     }
 }

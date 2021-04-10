@@ -30,6 +30,7 @@
     <Color x:Key="ParagraphTextColor">#FFFFFF</Color>
     <Color x:Key="LightTextColor">#FFFFFF</Color>
     <Color x:Key="DarkTextColor">#000000</Color>
+    <Color x:Key="TransparentWhite">#50FFFFFF</Color>
 
     <!--STACKLAYOUTS-->
     <Style TargetType="StackLayout"
@@ -46,6 +47,27 @@
     <!--<Style TargetType="ff:CachedImage">
         <Setter Property="DownsampleToViewSize" Value="True"/>
     </Style>-->
+
+    <Style TargetType="Button" x:Key="JumpBackInButton">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="Android" Value="22"/>
+                    <On Platform="iOS" Value="20"/>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource TitleTextColor}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource BoldFont}"/>
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentWhite}"/>
+        <Setter Property="CornerRadius">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="x:Double" iOS="20" Android="40"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextTransform" Value="Uppercase"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
     
 
     <!--========================================LABELS=======================================-->

@@ -17,6 +17,7 @@ namespace Grace2020.ViewModels.Collections
 {
     public class ModulesVM : AbstractCollectionVM
     {
+        public bool IsBackNavEnabled;
         public string ENGreeting => GetProperGreetingForTimeOfDay("en");
         public string JAGreeting => GetProperGreetingForTimeOfDay("ja");
         public string Date => DateTime.Now.Date.ToString(CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern);
@@ -36,10 +37,13 @@ namespace Grace2020.ViewModels.Collections
         {
             NavigateToPrayerHome = new RelayCommand<Module>(async (module) =>
             {
-                await CurrentUserUtil.UpdateCurrentUserConfigAsync(module?.ModuleId);
-                var vm = new PrayerHomeVM(module);
-                NavigationService.GoTo("///Home", vm);
-                await vm.Load();
+                if (module.ModuleName != StringResources.PrayerModules)
+                {
+                    await CurrentUserUtil.UpdateCurrentUserConfigAsync(module?.ModuleId);
+                    var vm = new PrayerHomeVM(module);
+                    NavigationService.GoTo("///Home", vm);
+                    await vm.Load();
+                }
             });
 
             JumpBackIn = new RelayCommand(async () =>
@@ -51,7 +55,15 @@ namespace Grace2020.ViewModels.Collections
                     {
                         var moduleLookup = await db.AsyncConnection.FindAsync<ModulesLookup>(i => i.ModuleLookupId == config.CurrentTopicId);
                         var vm = new PrayerHomeVM(moduleLookup);
-                        NavigationService.GoTo("///Home", vm);
+                        if (IsBackNavEnabled)
+                        {
+                            NavigationService.GoTo("..");
+                        }
+                        else
+                        {
+                            NavigationService.GoTo("///Home", vm);
+                        }
+                        
                         await vm.Load();
                     }
                 }
@@ -84,7 +96,9 @@ namespace Grace2020.ViewModels.Collections
                 JumpBackInEnabled = true;
                 RaisePropertyChanged(nameof(JumpBackInEnabled));
             }
-            Modules = await LoadModelsAsync<Module>();
+            var modules = new List<Module> { new Module { ModuleName = StringResources.PrayerModules } };
+            modules.AddRange(await LoadModelsAsync<Module>());
+            Modules = new ObservableCollection<Module>(modules);
         }
     }
 }

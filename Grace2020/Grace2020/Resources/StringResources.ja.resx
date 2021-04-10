@@ -181,7 +181,7 @@
     <value>祈り</value>
   </data>
   <data name="PrayerModules" xml:space="preserve">
-    <value>祈りのモジュール</value>
+    <value>祈りのモジュール:</value>
   </data>
   <data name="Prefecture" xml:space="preserve">
     <value>県</value>

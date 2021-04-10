@@ -250,7 +250,7 @@ namespace Grace2020.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prayer Modules.
+        ///   Looks up a localized string similar to Prayer Modules:.
         /// </summary>
         public static string PrayerModules {
             get {
@@ -295,7 +295,16 @@ namespace Grace2020.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the Bible, the Holy Spirit led Moses and the Israelites through the desert as a pillar of fire. The fire not only “lit the way” through the desert but represented the promise of things to come. In the day of Pentecost, tongues of fire came down on people and continues to move throughout the world among the people of every language, tribe, and nation. As the Olympic torch (the “Holy Fire” in Japanese) is carried by thousands of people across the nation, we can pray for thousands of people to carry the fir [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Topics.
+        /// </summary>
+        public static string Topics {
+            get {
+                return ResourceManager.GetString("Topics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Olympic Torch motto is &quot;Hope Lights Our Way.&quot; The Holy Spirit led Moses and the Israelites through the desert as a pillar of fire. The fire not only “lit the way” through the desert but represented the promise of things to come. In the day of Pentecost, tongues of fire came down on people and continue to move throughout the world among the people of every language, tribe, and nation. Since arriving in Japan in March of 2020, the Olympic Torch (“Holy Fire” in Japanese) has been waiting to be carried acro [rest of string was truncated]&quot;;.
         /// </summary>
         public static string VisionStatement {
             get {

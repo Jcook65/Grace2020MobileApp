@@ -5,11 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Grace2020.Views.Instances.AboutVW"
-             xmlns:cntrl="clr-namespace:Grace2020.Controls"
+             xmlns:cnvrt="clr-namespace:Grace2020.Converters"
              xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              BackgroundColor="{DynamicResource NavigationPrimary}">
+    <ContentPage.Resources>
+        <cnvrt:HalfNumberConverter x:Key="half"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView HorizontalOptions="Center"
                     HorizontalScrollBarVisibility="Never">
@@ -35,160 +38,153 @@
                                HorizontalOptions="Center"
                                VerticalOptions="Center"
                                Margin="0,20,0,20"/>-->
-                
-                <Frame Margin="20,0"
-                       CornerRadius="20"
-                       BackgroundColor="{DynamicResource NavigationSecondary}">
-                    <StackLayout HorizontalOptions="Center"
-                                 VerticalOptions="Center">
-                        <!--<Frame CornerRadius="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               HeightRequest="100"
-                               WidthRequest="100"
-                               Margin="20">
+                <StackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Margin="40,0">
+                    <Frame CornerRadius="40"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           HeightRequest="{Binding Width, Source={x:Reference logoFrame}, Converter={StaticResource half}}"
+                           HasShadow="False"
+                           Margin="0,0,0,20"
+                           x:Name="logoFrame">
                             <Frame.Background>
                                 <LinearGradientBrush>
                                     <GradientStop Color="{DynamicResource GraceLightColor}" Offset="0.1"/>
                                     <GradientStop Color="{DynamicResource GraceDarkColor}" Offset="1.0"/>
                                 </LinearGradientBrush>
-                            </Frame.Background>-->
-                            <Image x:Name="logo"
-                                   Source="GRACE2020_ABOUT.png"
-                                   HorizontalOptions="Center"
-                                   VerticalOptions="Center"
-                                   Margin="10"/>
-                        <!--</Frame>-->
-                        
-                        
-                        <Label Text="{trns:Translate Text=VisionStatement}"
+                            </Frame.Background>
+                        <Image x:Name="logo"
+                               Source="LOGOtransparent.png"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               HeightRequest="{OnIdiom Phone=100, Tablet=200}"
+                               WidthRequest="{OnIdiom Phone=100, Tablet=200}"
+                               Margin="10"/>
+                    </Frame>
+
+
+                    <Label Text="GRACE 2020"
+                           Style="{DynamicResource LabelHeader1Style}"/>
+
+                    <Label Text="{trns:Translate Text=VisionStatement}"
                                Style="{DynamicResource LabelStyle}"
-                               TextColor="{DynamicResource DarkTextColor}"
                                Margin="0,0,0,20"/>
 
                     <!--More Info-->
-                        <Label Text="{trns:Translate Text=MoreInfo}"
+                    <Label Text="{trns:Translate Text=MoreInfo}"
                                Style="{DynamicResource LabelHeader1Style}"
-                               TextColor="{DynamicResource DarkTextColor}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"/>
-                        <StackLayout Orientation="Horizontal"
+                    <StackLayout Orientation="Horizontal"
                                      Margin="10,0,0,0">
-                            <Image Source="bluebullet.png"
+                        <Image Source="bluebullet.png"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center"/>
-                            <Label Style="{DynamicResource LabelStyle}"
-                               TextColor="{DynamicResource DarkTextColor}"
+                        <Label Style="{DynamicResource LabelStyle}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="www.communityarts.jp"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="www.communityarts.jp"
                                               TextDecorations="Underline">
-                                            <Span.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenWeblink}"
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenWeblink}"
                                                                       CommandParameter="http://www.communityarts.jp/"/>
-                                            </Span.GestureRecognizers>
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal"
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
                                      Margin="10,0,0,20">
-                            <Image Source="bluebullet.png"
+                        <Image Source="bluebullet.png"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center"/>
-                            <Label Style="{DynamicResource LabelStyle}"
-                               TextColor="{DynamicResource DarkTextColor}"
+                        <Label Style="{DynamicResource LabelStyle}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="www.grace2020.org"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="www.grace2020.org"
                                               TextDecorations="Underline">
-                                            <Span.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenWeblink}"
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenWeblink}"
                                                                       CommandParameter="https://www.grace2020.org/"/>
-                                            </Span.GestureRecognizers>
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
 
-                        <!--Contact-->
-                        <Label Text="{trns:Translate Text=ContactUs}"
+                    <!--Contact-->
+                    <!--<Label Text="{trns:Translate Text=ContactUs}"
                                Style="{DynamicResource LabelHeader1Style}"
-                               TextColor="{DynamicResource DarkTextColor}"
                                HorizontalOptions="Start"
                                VerticalOptions="Center"/>
 
-                        <StackLayout Orientation="Horizontal"
+                    <StackLayout Orientation="Horizontal"
                                      Margin="10,0,0,0">
-                            <Image Source="bluebullet.png"
+                        <Image Source="bluebullet.png"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center"/>
-                            <Label Style="{DynamicResource LabelStyle}"
-                               TextColor="{DynamicResource DarkTextColor}"
+                        <Label Style="{DynamicResource LabelStyle}"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="support@grace2020.org"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="support@grace2020.org"
                                               TextDecorations="Underline">
-                                            <Span.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenEmail}"
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenEmail}"
                                                                       CommandParameter="support@grace2020.org"/>
-                                            </Span.GestureRecognizers>
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>-->
 
-                        <StackLayout Orientation="Horizontal"
+                    <!--<StackLayout Orientation="Horizontal"
                                      Margin="10,0,0,10">
-                            <Image Source="bluebullet.png"
+                        <Image Source="bluebullet.png"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center"/>
-                            <Label Style="{DynamicResource LabelStyle}"
-                               TextColor="{DynamicResource DarkTextColor}"
+                        <Label Style="{DynamicResource LabelStyle}"
                                    HorizontalOptions="Start"
                                    VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="info@grace2020.org"
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="info@grace2020.org"
                                               TextDecorations="Underline">
-                                            <Span.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding OpenEmail}"
+                                        <Span.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenEmail}"
                                                                       CommandParameter="info@grace2020.org"/>
-                                            </Span.GestureRecognizers>
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
+                                        </Span.GestureRecognizers>
+                                    </Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>-->
 
-                        <StackLayout Orientation="Horizontal"
+                    <StackLayout Orientation="Horizontal"
                                  Margin="0,0,0,10">
-                            <StackLayout.IsVisible>
-                                <OnPlatform x:TypeArguments="x:Boolean">
-                                    <On Platform="iOS" Value="False"/>
-                                    <On Platform="Android" Value="True"/>
-                                </OnPlatform>
-                            </StackLayout.IsVisible>
-                            <Label Text="{trns:Translate Text=DarkMode}"
-                               TextColor="{DynamicResource DarkTextColor}"
+                        <StackLayout.IsVisible>
+                            <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="iOS" Value="False"/>
+                                <On Platform="Android" Value="True"/>
+                            </OnPlatform>
+                        </StackLayout.IsVisible>
+                        <Label Text="{trns:Translate Text=DarkMode}"
                                Style="{DynamicResource LabelStyle}"/>
-                            <Switch IsToggled="{Binding IsDarkModeEnabled}"
+                        <Switch IsToggled="{Binding IsDarkModeEnabled}"
                                 OnColor="{StaticResource GraceLightColor}"
                                 Toggled="DarkModeToggled"
                                     x:Name="themeSwitch"/>
-                        </StackLayout>
                     </StackLayout>
-                </Frame>
-                
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Grace2020.Views.Collections.TopicsListVW"
+             x:Name="this"
+             xmlns:cnvrt="clr-namespace:Grace2020.Utils"
+             xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
+             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="True"
+             Shell.PresentationMode="NotAnimated"
+             BackgroundColor="{DynamicResource NavigationPrimary}">
+    <ContentPage.Resources>
+        <cnvrt:StringIsNotNullOrEmptyConverter x:Key="notNull"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="0,0,0,10"
+              HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalOptions="Center"
+                  Grid.Row="0">
+                <SearchBar TextChanged="OnSearchTextChanged"
+                           Placeholder="{trns:Translate Text=SearchForPrefecture}"
+                           BackgroundColor="{DynamicResource NavigationPrimary}"
+                           PlaceholderColor="{DynamicResource NavigationForeground}"
+                           TextColor="{DynamicResource DarkTextColor}"
+                           CancelButtonColor="{DynamicResource NavigationForeground}"
+                           Margin="20,0,20,0"/>
+            </Grid>
+
+            <ListView x:Name="topicsList"
+                      Grid.Row="1"
+                      ItemsSource="{Binding Items, Source={x:Reference this}}"
+                      HasUnevenRows="True"
+                      CachingStrategy="RecycleElement"
+                      SeparatorVisibility="None"
+                      HorizontalOptions="Center"
+                      BackgroundColor="{DynamicResource NavigationPrimary}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView HorizontalOptions="Fill"
+                                         VerticalOptions="Fill"
+                                         x:Name="prayerCard">
+                                <ContentView.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <On Platform="iOS" Value="0,30,0,0"/>
+                                    </OnPlatform>
+                                </ContentView.Margin>
+                                <StackLayout HorizontalOptions="Fill"
+                                             VerticalOptions="Center"
+                                             Spacing="0">
+                                    <Label Text="{Binding OptionalDelimiter}"
+                                           Style="{DynamicResource LabelHeader1Style}"
+                                           IsVisible="{Binding OptionalDelimiter, Converter={StaticResource notNull}}"
+                                           TextTransform="Uppercase"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,-5"
+                                           Padding="0"/>
+
+                                    <Label Text="{Binding Topic.Title}"
+                                           Style="{DynamicResource PageTitleStyle}"
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,-5"
+                                           Padding="0"/>
+                                    <Label Text="{Binding Topic.SubTitle}"
+                                           Style="{DynamicResource LabelHeader2Style}"
+                                           FontFamily="{StaticResource NormalFont}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="End"
+                                           Margin="0,-5,0,0"
+                                           Padding="0"/>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ActivityIndicator Color="{DynamicResource NavigationForeground}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               x:Name="activityIndicator"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

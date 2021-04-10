@@ -5,19 +5,19 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Grace2020.Views.Collections.NewsVW"
+             x:Name="this"
              xmlns:ivw="clr-namespace:Grace2020.Views.Instances"
              xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
              BackgroundColor="{DynamicResource NavigationPrimary}">
     <ContentPage.Content>
         <Grid Margin="0,30,0,10"
               HorizontalOptions="Center">
-            <ListView ItemsSource="{Binding NewsPosts}"
+            <ListView x:Name="newsList"
+                      ItemsSource="{Binding NewsPosts}"
                       SelectedItem="{Binding SelectedNews}"
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement"
                       SeparatorVisibility="None"
-                      ItemSelected="ListView_ItemSelected"
-                      x:Name="newsList"
                       HorizontalOptions="Center"
                       BackgroundColor="{DynamicResource NavigationPrimary}">
                 <ListView.Header>
@@ -25,7 +25,7 @@
                         <Grid HorizontalOptions="Center">
                             <Grid.Margin>
                                 <OnPlatform x:TypeArguments="Thickness">
-                                    <On Platform="iOS" Value="30"/>
+                                    <On Platform="iOS" Value="30,40,30,30"/>
                                     <On Platform="Android" Value="20"/>
                                 </OnPlatform>
                             </Grid.Margin>
@@ -42,10 +42,13 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
             <ActivityIndicator Color="{DynamicResource NavigationForeground}"
                                IsRunning="{Binding IsBusy}"
                                HorizontalOptions="Center"
-                               VerticalOptions="Center"/>
+                               VerticalOptions="Center"
+                               x:Name="activityIndicator"/>
+            
             <Label Text="{trns:Translate Text=NoInformationAvailable}"
                    Style="{DynamicResource NoItemsLabelStyle}"
                    IsVisible="False">

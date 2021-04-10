@@ -14,7 +14,7 @@
     <AssemblyName>Grace2020.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <ProvisioningType>manual</ProvisioningType>
+    <ProvisioningType>automatic</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -447,6 +447,26 @@
   <ItemGroup>
     <BundleResource Include="..\..\Assets\images\iOS\NewsIcon.png">
       <Link>Resources\NewsIcon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\EventsIcon.svg">
+      <Link>Resources\EventsIcon.svg</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\HomeIcon.svg">
+      <Link>Resources\HomeIcon.svg</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\InfoIcon.svg">
+      <Link>Resources\InfoIcon.svg</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Assets\images\NewsIcon.svg">
+      <Link>Resources\NewsIcon.svg</Link>
     </BundleResource>
   </ItemGroup>
   <ProjectExtensions>

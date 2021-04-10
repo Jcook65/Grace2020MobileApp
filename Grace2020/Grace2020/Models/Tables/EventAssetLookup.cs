@@ -4,6 +4,7 @@ using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 
 namespace Grace2020.Models.Tables
 {
@@ -17,6 +18,6 @@ namespace Grace2020.Models.Tables
         public string EventId { get; set; }
 
         [Ignore]
-        public string AssetUrl => $"{Constants.GRACE2020ImageUrl}?file={AssetName}";
+        public string AssetUrl => $"{Constants.GRACE2020ImageUrl}?file={HttpUtility.UrlEncode(AssetName)}";
     }
 }

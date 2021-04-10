@@ -7,105 +7,36 @@
              x:Class="Grace2020.Views.Instances.NewsItemVW"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              BackgroundColor="{DynamicResource NavigationPrimary}">
-    <!--<ContentView.MinimumHeightRequest>
-        <OnPlatform x:TypeArguments="x:Double" iOS="500" Android="-1"/>
-    </ContentView.MinimumHeightRequest>-->
     <ContentView.Content>
-        <Frame CornerRadius="20"
-               BackgroundColor="{DynamicResource NavigationSecondary}"
-               Margin="20, 10"
+        <Frame CornerRadius="40"
+               Margin="20"
+               Padding="0"
+               HasShadow="False"
                IsClippedToBounds="True"
-               HasShadow="True">
-            <Grid RowSpacing="0">
+               BackgroundColor="{DynamicResource TransparentWhite}">
+            <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="70*"/>
-                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="{OnIdiom Phone=250, Tablet=400}"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Frame Padding="0"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Fill"
-                       CornerRadius="20"
-                       HasShadow="False"
-                       IsClippedToBounds="True"
-                       Margin="0,0,0,10">
-                    <ff:CachedImage x:Name="newsImage"
-                                    RetryDelay="600"
-                                    LoadingPlaceholder="loadingImage.jpg"
-                                    FadeAnimationForCachedImages="False"
-                                    HorizontalOptions="Fill"
-                                    VerticalOptions="Fill">
-                        <ff:CachedImage.Aspect>
-                            <OnPlatform x:TypeArguments="Aspect">
-                                <On Platform="Android" Value="AspectFit"/>
-                                <On Platform="iOS" Value="AspectFill"/>
-                            </OnPlatform>
-                        </ff:CachedImage.Aspect>
-                        <ff:CachedImage.HeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double" iOS="{OnIdiom Phone=-1, Tablet=400}" Android="-1"/>
-                        </ff:CachedImage.HeightRequest>
-                    </ff:CachedImage>
-                </Frame>
-
+                <ff:CachedImage Grid.Row="0"
+                                x:Name="newsImage"
+                                Aspect="AspectFill"
+                                LoadingPlaceholder="loadingImage.jpg"/>
                 <StackLayout Grid.Row="1"
+                             Margin="20,10,10,15"
                              HorizontalOptions="Start"
-                             VerticalOptions="Center">
+                             VerticalOptions="Start"
+                             Spacing="0">
                     <Label Text="{Binding Title}"
-                           TextTransform="Uppercase"
                            Style="{DynamicResource LabelHeader1Style}"
-                           TextColor="{DynamicResource DarkTextColor}"/>
+                           TextTransform="Uppercase"/>
                     <Label Text="{Binding FormattedDate}"
                            Style="{DynamicResource LabelHeader3Style}"
-                           FontSize="16"
-                           TextColor="{DynamicResource DarkTextColor}"/>
+                           FontSize="Small"/>
                 </StackLayout>
             </Grid>
         </Frame>
-        <!--<Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <StackLayout Spacing="0"
-                         Margin="10,20,10,20"
-                         Orientation="Vertical"
-                         HorizontalOptions="StartAndExpand"
-                         Grid.Column="0">
-                <Label Text="{Binding Title}"
-                       Style="{DynamicResource LabelHeader1Style}"
-                       LineBreakMode="WordWrap"
-                       HorizontalOptions="Start"/>
-
-                <Label Text="{Binding FormattedDate}"
-                       Style="{DynamicResource BoldLabelStyle}"
-                       LineBreakMode="WordWrap"
-                       HorizontalOptions="Start"/>
-
-                <Label Text="{Binding TruncatedNews}"
-                       Style="{DynamicResource LabelStyle}"
-                       LineBreakMode="WordWrap"
-                       HorizontalOptions="Start"/>
-            </StackLayout>
-
-            <ff:CachedImage x:Name="newsImage"
-                            RetryDelay="600"
-                            DownsampleToViewSize="True"
-                            LoadingPlaceholder="loadingImage.jpg"
-                            FadeAnimationEnabled="True"
-                            FadeAnimationDuration="750"
-                            FadeAnimationForCachedImages="False"
-                            TransformPlaceholders="True"
-                            HorizontalOptions="End"
-                            VerticalOptions="Center"
-                            HeightRequest="300"
-                            Aspect="AspectFit"
-                            Grid.Column="1">
-                <ff:CachedImage.Transformations>
-                    <fftransform:CornersTransformation CornersTransformType="LeftRounded"
-                                                        TopLeftCornerSize="30"
-                                                        BottomLeftCornerSize="30"
-                                                        CropHeightRatio="1.75"/>
-                </ff:CachedImage.Transformations>
-            </ff:CachedImage>
-        </Grid>-->
     </ContentView.Content>
 </ContentView>

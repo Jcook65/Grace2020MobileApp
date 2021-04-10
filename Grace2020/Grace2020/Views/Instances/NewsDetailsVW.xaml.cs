@@ -31,6 +31,11 @@ namespace Grace2020.Views.Instances
         {
             InitializeComponent();
             NewsPropertyChanged += OnNewsPropertyChanged;
+            if(indicatorView?.Count <= 1)
+            {
+                pictureCarousel.Loop = false;
+            }
+
         }
 
         private void OnNewsPropertyChanged(object sender, string e)

@@ -28,66 +28,53 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Never">
-            <Frame BackgroundColor="{DynamicResource NavigationSecondary}"
-                   CornerRadius="20"
-                   Margin="20,40">
-                <Grid RowSpacing="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackLayout Spacing="0"
-                                 Grid.Row="0">
-                        <CarouselView x:Name="pictureCarousel"
-                                      VerticalOptions="Center"
-                                      Loop="True"
-                                      IndicatorView="indicatorView"
-                                      HeightRequest="300"
-                                      Margin="0,0,0,10">
-                            <CarouselView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"
-                                                   SnapPointsAlignment="Center"
-                                                   SnapPointsType="MandatorySingle"/>
-                            </CarouselView.ItemsLayout>
-                            <CarouselView.ItemTemplate>
-                                <DataTemplate>
-                                    <ContentView HorizontalOptions="Center"
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{OnIdiom Phone=350, Tablet=550}"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Spacing="0"
+                             Grid.Row="0">
+                    <CarouselView x:Name="pictureCarousel"
+                                  VerticalOptions="Center"
+                                  Loop="True"
+                                  IndicatorView="indicatorView"
+                                  Margin="0,20,0,10">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"
+                                               SnapPointsAlignment="Center"
+                                               SnapPointsType="MandatorySingle"/>
+                        </CarouselView.ItemsLayout>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <ContentView HorizontalOptions="Center"
                                                  VerticalOptions="Center">
-                                        <cntrl:RoundedNewsImageVW HorizontalOptions="Center"/>
-                                    </ContentView>
-                                </DataTemplate>
-                            </CarouselView.ItemTemplate>
-                        </CarouselView>
-                        <IndicatorView x:Name="indicatorView"
-                                   IndicatorColor="{DynamicResource NavigationForeground}"
-                                   SelectedIndicatorColor="{DynamicResource GraceLightColor}"
+                                    <cntrl:RoundedNewsImageVW HorizontalOptions="Center"/>
+                                </ContentView>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView"
+                                   IndicatorColor="{DynamicResource TransparentWhite}"
+                                   SelectedIndicatorColor="{DynamicResource NavigationForeground}"
                                    VerticalOptions="Start"
                                    IndicatorsShape="Circle"
-                                   HorizontalOptions="Center"/>            
-                    </StackLayout>
+                                   HorizontalOptions="Center"/>
+                </StackLayout>
 
-                    
-                    <StackLayout Spacing="0"
-                                 Grid.Row="1">
-                        <StackLayout Spacing="0"
-                                     Margin="10,20,10,10"
-                                     Grid.Row="1">
-                            <Label Text="{Binding News.Title}"
-                                   Style="{DynamicResource LabelHeader1Style}"
-                                   TextColor="{DynamicResource DarkTextColor}"
-                                   TextTransform="Uppercase"/>
-                            <Label Text="{Binding News.FormattedDate}"
-                                   Style="{DynamicResource LabelHeader3Style}"
-                                   TextColor="{DynamicResource DarkTextColor}"
-                                   Margin="0,0,0,20"/>
-                            <Label Text="{Binding News.Body}"
-                                   TextColor="{DynamicResource DarkTextColor}"
-                                   Style="{DynamicResource LabelStyle}"/>
-                        </StackLayout>
-                    </StackLayout>                    
-                </Grid>
-
-            </Frame>
+                <StackLayout Spacing="0"
+                             Margin="40,20"
+                             Grid.Row="1">
+                    <Label Text="{Binding News.Title}"
+                               Style="{DynamicResource LabelHeader1Style}"
+                               TextTransform="Uppercase"/>
+                    <Label Text="{Binding News.FormattedDate}"
+                               Style="{DynamicResource LabelHeader3Style}"
+                               Margin="0,0,0,20"/>
+                    <Label Text="{Binding News.Body}"
+                               Style="{DynamicResource LabelStyle}"/>
+                </StackLayout>
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -27,9 +27,9 @@ namespace Grace2020.Models.Tables
         public Module Module { get; set; }
 
         [Ignore]
-        public string OptionalDelimiter => Module?.OptionalSequenceDenotation != null ? $"{Module.OptionalSequenceDenotation} {Sequence}" : null;
-        [Ignore]
-        public int SequenceIndex => Sequence - 1;
+        public string OptionalDelimiter => Module?.OptionalSequenceDenotation != null 
+            ? App.GetCultureInfo().TwoLetterISOLanguageName.ToLower() == "ja" 
+            ? $"{Sequence} {Module.OptionalSequenceDenotation}" : $"{Module.OptionalSequenceDenotation} {Sequence}" : null;
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

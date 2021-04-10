@@ -95,6 +95,8 @@ namespace Grace2020
         {
             Routing.RegisterRoute(ViewLocator.NewsDetailPage, typeof(NewsDetailsVW));
             Routing.RegisterRoute(ViewLocator.ImageViewerPage, typeof(ImageViewerVW));
+            Routing.RegisterRoute(ViewLocator.ModulesPage, typeof(ModulesVW));
+            Routing.RegisterRoute(ViewLocator.TopicsPage, typeof(TopicsListVW));
         }
         private void RegisterDependencies()
         {

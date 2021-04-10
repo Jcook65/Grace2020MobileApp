@@ -7,8 +7,10 @@
                          xmlns:cntrl="clr-namespace:Grace2020.Controls"
                          xmlns:trns="clr-namespace:Grace2020.MarkupExtensions"
                          xmlns:cnvrt="clr-namespace:Grace2020.Utils"
+                         xmlns:conv="clr-namespace:Grace2020.Converters"
                          xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView"
                          xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+                         xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
                          mc:Ignorable="d"
                          x:Name="this"
                          x:Class="Grace2020.Views.Collections.PrayerHomeVW"
@@ -26,8 +28,16 @@
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="WidthRequest" Value="150"/>
         </Style>
+        
+        <Style x:Key="ActiveIndicator" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{DynamicResource NavigationForeground}" />
+        </Style>
+        <Style x:Key="InactiveIndicator" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{DynamicResource TransparentWhite}" />
+        </Style>
 
         <cnvrt:StringIsNotNullOrEmptyConverter x:Key="notNull"/>
+        <conv:BaseZeroSequenceConverter x:Key="baseZero"/>
     </cntrl:ThemedContentPage.Resources>
     <cntrl:ThemedContentPage.Content>
         <Grid RowSpacing="0"
@@ -44,29 +54,33 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <cards:CarouselView ItemsSource="{Binding Topics}"
-                                    SelectedIndex="{Binding SelectedModulesLookup.SequenceIndex, Mode=OneWay}"
+                <cards:CoverFlowView ItemsSource="{Binding Topics}"
                                     HorizontalOptions="Fill"
                                     VerticalOptions="Fill"
                                     WidthRequest="900"
-                                    ItemAppearing="OnItemAppearing"
-                                    x:Name="dayCarousel"
-                                    IsCyclical="True">
+                                    IsCyclical="True"
+                                    x:Name="dayCarousel">
+                    <!--<cards:CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                           SnapPointsAlignment="Center"
+                                           SnapPointsType="MandatorySingle"/>
+                    </cards:CarouselView.ItemsLayout>-->
+
                     <x:Arguments>
-                        <proc:CarouselProcessor OpacityFactor="-1" ScaleFactor=".9"/>
+                        <proc:CoverFlowProcessor OpacityFactor=".2" ScaleFactor=".9"/>
                     </x:Arguments>
 
-                    <cards:CarouselView.ItemTemplate>
+                    <cards:CoverFlowView.ItemTemplate>
                         <DataTemplate>
                             <ContentView HorizontalOptions="Fill"
                                          VerticalOptions="Fill"
                                          x:Name="prayerCard">
                                 <ContentView.Margin>
                                     <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="iOS" Value="0,20,0,0"/>
+                                        <On Platform="iOS" Value="0,30,0,0"/>
                                     </OnPlatform>
                                 </ContentView.Margin>
-                                <StackLayout BackgroundColor="{DynamicResource NavigationPrimary}"
+                                <StackLayout BackgroundColor="Transparent"
                                              HorizontalOptions="Fill"
                                              VerticalOptions="Center"
                                              Spacing="0">
@@ -94,8 +108,17 @@
                                 </StackLayout>
                             </ContentView>
                         </DataTemplate>
-                    </cards:CarouselView.ItemTemplate>
-                </cards:CarouselView>
+                    </cards:CoverFlowView.ItemTemplate>
+                </cards:CoverFlowView>
+                
+                <IndicatorView x:Name="indicatorView"
+                               IndicatorColor="{DynamicResource TransparentWhite}"
+                               SelectedIndicatorColor="{DynamicResource NavigationForeground}"
+                               IndicatorsShape="Circle"
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Opacity=".4"
+                               Margin="0,0,0,5"/>
             </Grid>
 
             <Grid x:Name="backIcon"
@@ -315,6 +338,7 @@
                                 <On Platform="iOS" Value="800"/>
                                 <On Platform="Android" Value="700"/>
                             </OnPlatform>
+                            
                         </ScrollView.HeightRequest>
                         <StackLayout>
                             <Label Text="{Binding SelectedModulesLookup.Topic.Info}"

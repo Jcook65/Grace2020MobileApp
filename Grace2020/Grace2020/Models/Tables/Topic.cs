@@ -4,6 +4,7 @@ using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 
 namespace Grace2020.Models.Tables
 {
@@ -17,7 +18,7 @@ namespace Grace2020.Models.Tables
         public string Info { get; set; }
         public string AssetName { get; set; }
 
-        public string AssetUrl => $"{Constants.GRACE2020ImageUrl}?file={AssetName}";
+        public string AssetUrl => $"{Constants.GRACE2020ImageUrl}?file={HttpUtility.UrlEncode(AssetName, Encoding.UTF8)}";
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Prayer> Prayers { get; set; }

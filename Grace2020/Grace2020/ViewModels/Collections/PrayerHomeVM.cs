@@ -49,7 +49,14 @@ namespace Grace2020.ViewModels.Collections
         public string SearchCriteria
         {
             get { return _searchCriteria; }
-            set { Set(() => SearchCriteria, ref _searchCriteria, value); }
+            set 
+            { 
+                Set(() => SearchCriteria, ref _searchCriteria, value);
+                if (string.IsNullOrWhiteSpace(SearchCriteria))
+                {
+                    Task.Run(async () => await LoadTopics());
+                }
+            }
         }
 
         private bool _searching;
@@ -66,23 +73,26 @@ namespace Grace2020.ViewModels.Collections
 
         public PrayerHomeVM()
         {
+            Topics = new ObservableCollection<ModulesLookup>();
             SetSearchCommand();
             TopicsLoaded += OnTopicsLoaded;
         }
 
         public PrayerHomeVM(Module module)
         {
+            Topics = new ObservableCollection<ModulesLookup>();
             SetSearchCommand();
             _selectedModule = module;
-            _selectedModulesLookup = null;
+            SelectedModulesLookup = null;
             TopicsLoaded += OnTopicsLoaded;
             ModulesLookupSelected += OnModuleLookupSelected;
         }
 
         public PrayerHomeVM(ModulesLookup moduleLookup)
         {
+            Topics = new ObservableCollection<ModulesLookup>();
             SetSearchCommand();
-            _selectedModulesLookup = moduleLookup;
+            SelectedModulesLookup = moduleLookup;
             TopicsLoaded += OnTopicsLoaded;
             ModulesLookupSelected += OnModuleLookupSelected;
         }
@@ -110,11 +120,12 @@ namespace Grace2020.ViewModels.Collections
                 {
                     Searching = true;
                     SearchCriteria = SearchCriteria.Trim();
-                    var topic = Topics.ToList().Find(i => i.Topic.Title.ToUpper().Contains(SearchCriteria.ToUpper())
-                                                          || (int.TryParse(SearchCriteria, out int seq) && i.Sequence == seq));
-                    SelectedModulesLookup = topic ?? SelectedModulesLookup;
+                    if (!string.IsNullOrWhiteSpace(SearchCriteria))
+                    {
+                        Topics = new ObservableCollection<ModulesLookup>(Topics.ToList().Where(i => i.Topic.Title.ToUpper().Contains(SearchCriteria.ToUpper())
+                                                              || (int.TryParse(SearchCriteria, out int seq) && i.Sequence == seq)));
+                    }
                     Searching = false;
-                    SearchCriteria = null;
                 }
             });
         }
@@ -145,7 +156,6 @@ namespace Grace2020.ViewModels.Collections
                     ModulesLookup moduleLookup = null;
                     if (config != null && config.CurrentTopicId != null && (Topics?.Any(i => i.ModuleLookupId == config.CurrentTopicId) ?? false))
                     {
-
                         moduleLookup = await db.AsyncConnection.FindAsync<ModulesLookup>(i => i.ModuleLookupId == config.CurrentTopicId);
                     }
                     else

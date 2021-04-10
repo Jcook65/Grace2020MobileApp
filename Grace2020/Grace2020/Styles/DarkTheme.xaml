@@ -4,9 +4,9 @@
                     x:Class="Grace2020.Styles.DarkTheme"
                     Source="BaseTheme.xaml">
     <!-- COLORS -->
-    <Color x:Key="NavigationPrimary">#282828</Color>
-    <Color x:Key="NavigationSecondary">#1B365D</Color>
-    <Color x:Key="NavigationPrimaryDarker">#282828</Color>
+    <Color x:Key="NavigationPrimary">#1B365D</Color>
+    <Color x:Key="NavigationSecondary">#282828</Color>
+    <Color x:Key="NavigationPrimaryDarker">#1B365D</Color>
     <Color x:Key="NavigationForeground">#ffffff</Color>
     <Color x:Key="GracePink">#ED1D66</Color>
     <Color x:Key="GracePurple">#91479B</Color>
