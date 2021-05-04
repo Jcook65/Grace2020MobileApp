@@ -63,7 +63,7 @@ namespace Grace2020.Views.Collections
         {
             if (!string.IsNullOrWhiteSpace(e.NewTextValue))
             {
-                Items = new ObservableCollection<ModulesLookup>(_vm?.Topics.Where(i => i.Topic.Title.Contains(e.NewTextValue)));
+                Items = new ObservableCollection<ModulesLookup>(_vm?.Topics.Where(i => i.Topic.Title.ToLower().Contains(e.NewTextValue.ToLower())));
             }
             else
             {

@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <SelectedDevice>Remote Device</SelectedDevice>
+    <SelectedDevice>iPhone 12 Pro Max iOS 14.4</SelectedDevice>
     <DefaultDevice>iPhone 12 Pro Max iOS 14.4</DefaultDevice>
-    <DeveloperId>joncook2427%40gmail.com</DeveloperId>
-    <DevelopmentTeamId>V2TA2U66UG</DevelopmentTeamId>
+    <DeveloperId>
+    </DeveloperId>
+    <DevelopmentTeamId>
+    </DevelopmentTeamId>
     <TargetiOSDevice>&lt;%3fxml version="1.0" encoding="UTF-8"%3f&gt;
 &lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
 &lt;plist version="1.0"&gt;

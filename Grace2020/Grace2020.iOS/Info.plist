@@ -25,7 +25,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.xamarin.Grace2020</string>
 	<key>CFBundleVersion</key>
-	<string>1.2.2</string>
+	<string>1.2.3</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
@@ -45,7 +45,7 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleShortVersionString</key>
-	<string>11</string>
+	<string>12</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 </dict>

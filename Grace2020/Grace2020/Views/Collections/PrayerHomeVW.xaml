@@ -345,7 +345,16 @@
                                        HorizontalOptions="Center"
                                        Style="{DynamicResource LabelStyle}"
                                        TextColor="{DynamicResource DarkTextColor}"
-                                       Margin="40,40,40,50"/>
+                                       Margin="40,40,40,50">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsVisible, Source={x:Reference regionImage}}"
+                                                 Value="False">
+                                        <Setter Property="Margin"
+                                                Value="40,40,40,90"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
                             <Frame CornerRadius="20"
                                    Margin="40,0,40,90"
                                    HasShadow="False"

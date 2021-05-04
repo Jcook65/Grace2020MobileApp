@@ -43,12 +43,8 @@
                         <ViewCell>
                             <ContentView HorizontalOptions="Fill"
                                          VerticalOptions="Fill"
-                                         x:Name="prayerCard">
-                                <ContentView.Margin>
-                                    <OnPlatform x:TypeArguments="Thickness">
-                                        <On Platform="iOS" Value="0,30,0,0"/>
-                                    </OnPlatform>
-                                </ContentView.Margin>
+                                         x:Name="prayerCard"
+                                         Margin="0,30,0,0">
                                 <StackLayout HorizontalOptions="Fill"
                                              VerticalOptions="Center"
                                              Spacing="0">
